@@ -13,7 +13,8 @@ You find the "Signatursystematik (System for the shelf number)" of the library. 
 https://nbtkmy.github.io/library/systematik.html
 
 * Library gallery  
-The library has it's materials digitized for the archiving purpose. The few materials are published as IIIF images.   
+The library has it's materials digitized for the archiving purpose. The few materials are published as IIIF images.  
 https://nbtkmy.github.io/library/images.html  
-* IIIF image server: [Cantaloupe](https://cantaloupe-project.github.io/)  
-* IIIF image viewer: [Mirador](https://projectmirador.org/)  
+
+    * IIIF image server: [Cantaloupe](https://cantaloupe-project.github.io/)  
+    * IIIF image viewer: [Mirador](https://projectmirador.org/)  
