@@ -2,7 +2,7 @@
     "@context": "http://iiif.io/api/presentation/3/context.json",
     "id": "https://nbtkmy.github.io/library/manifests/flyer04_manifest.json",
     "type": "Manifest",
-    "label": { "ja": [ "南太平洋時報 : 八月廿五日発行" ] },
+    "label": { "en": [ "MacArthur has returned"] },
     "metadata": [
       {
         "label": { "en": [ "Creator" ] },
@@ -16,17 +16,17 @@
       },
       {
         "label": { "en": [ "Source" ] },
-        "value": { "none": [ "<span>Metadata from: <a href=\"https://uzb.swisscovery.slsp.ch/permalink/41SLSP_UZB/rloemb/alma990110954980205508\">Library catalogue</a></span>" ] }
+        "value": { "none": [ "<span>Metadata from: <a href=\"https://uzb.swisscovery.slsp.ch/permalink/41SLSP_UZB/18ib5b3/alma990110955400205508\">Library catalogue</a></span>" ] }
       }
     ],  
     "thumbnail": [
       {
-        "id": "https://imageserver.j-images.ch/images/iiif/3/flyer_08.jpg/full/80,100/0/default.jpg",
+        "id": "https://imageserver.j-images.ch/images/iiif/3/flyer_22.jpg/full/80,100/0/default.jpg",
         "type": "Image",
         "format": "image/jpeg",
         "service": [
           {
-            "id": "https://imageserver.j-images.ch/images/iiif/3/flyer_08.jpg",
+            "id": "https://imageserver.j-images.ch/images/iiif/3/flyer_22.jpg",
             "type": "ImageService3",
             "profile": "level2"
           }
@@ -41,110 +41,110 @@
       "value": { "en": [ "Digital image provided by AOI-Bibliothek" ] }
     },
     "start": {
-      "id": "https://imageserver.j-images.ch/iiif/flyer_04/canvas/p1",
+      "id": "https://imageserver.j-images.ch/iiif/flyer_09/canvas/p1",
       "type": "Canvas"
     },
     "items": [
       {
-        "id": "https://imageserver.j-images.ch/iiif/flyer_04/canvas/p1",
+        "id": "https://imageserver.j-images.ch/iiif/flyer_09/canvas/p1",
         "type": "Canvas",
         "label": { "none": [ "p. 1" ] },
         "height": 1200,
-        "width": 830,
+        "width": 947,
         "items": [
           {
-            "id": "https://imageserver.j-images.ch/iiif/flyer_04/page/p1",
+            "id": "https://imageserver.j-images.ch/iiif/flyer_09/page/p1",
             "type": "AnnotationPage",
             "items": [
               {
-                "id": "https://imageserver.j-images.ch/iiif/flyer_04/annotation/p1-image",
+                "id": "https://imageserver.j-images.ch/iiif/flyer_09/annotation/p1-image",
                 "type": "Annotation",
                 "motivation": "painting",
                 "body": {
-                  "id": "https://imageserver.j-images.ch/images/iiif/3/flyer_08.jpg/full/max/0/default.jpg",
+                  "id": "https://imageserver.j-images.ch/images/iiif/3/flyer_22.jpg/full/max/0/default.jpg",
                   "type": "Image",
                   "format": "image/jpeg",
                   "service": [
                     {
-                      "id": "https://imageserver.j-images.ch/images/iiif/3/flyer_08.jpg",
+                      "id": "https://imageserver.j-images.ch/images/iiif/3/flyer_22.jpg",
                       "type": "ImageService3",
                       "profile": "level2"
                     }
                   ],
                   "height": 1200,
-                  "width": 830
+                  "width": 947
                 },
-                "target": "https://imageserver.j-images.ch/iiif/flyer_04/canvas/p1"
+                "target": "https://imageserver.j-images.ch/iiif/flyer_09/canvas/p1"
               }
             ]
           }
         ]
       },
       {
-        "id": "https://imageserver.j-images.ch/iiif/flyer_04/canvas/p2",
+        "id": "https://imageserver.j-images.ch/iiif/flyer_09/canvas/p2",
         "type": "Canvas",
         "label": { "none": [ "p. 2" ] },
-        "height": 1058,
+        "height": 1172,
         "width": 1200,
         "items": [
           {
-            "id": "https://imageserver.j-images.ch/iiif/flyer_04/page/p2",
+            "id": "https://imageserver.j-images.ch/iiif/flyer_09/page/p2",
             "type": "AnnotationPage",
             "items": [
               {
-                "id": "https://imageserver.j-images.ch/iiif/flyer_04/annotation/p2-image",
+                "id": "https://imageserver.j-images.ch/iiif/flyer_09/annotation/p2-image",
                 "type": "Annotation",
                 "motivation": "painting",
                 "body": {
-                  "id": "https://imageserver.j-images.ch/images/iiif/3/flyer_09.jpg/full/max/0/default.jpg",
+                  "id": "https://imageserver.j-images.ch/images/iiif/3/flyer_23.jpg/full/max/0/default.jpg",
                   "type": "Image",
                   "format": "image/jpeg",
                   "service": [
                     {
-                      "id": "https://imageserver.j-images.ch/images/iiif/3/flyer_09.jpg",
+                      "id": "https://imageserver.j-images.ch/images/iiif/3/flyer_23.jpg",
                       "type": "ImageService3",
                       "profile": "level2"
                     }
                   ],
-                  "height": 1058,
+                  "height": 1172,
                   "width": 1200
                 },
-                "target": "https://imageserver.j-images.ch/iiif/flyer_04/canvas/p2"
+                "target": "https://imageserver.j-images.ch/iiif/flyer_09/canvas/p2"
               }
             ]
           }
         ]
       },
       {
-        "id": "https://imageserver.j-images.ch/iiif/flyer_04/canvas/p3",
+        "id": "https://imageserver.j-images.ch/iiif/flyer_09/canvas/p3",
         "type": "Canvas",
         "label": { "none": [ "p. 3" ] },
         "height": 1200,
-        "width": 830,
+        "width": 910,
         "items": [
           {
-            "id": "https://imageserver.j-images.ch/iiif/flyer_04/page/p3",
+            "id": "https://imageserver.j-images.ch/iiif/flyer_09/page/p3",
             "type": "AnnotationPage",
             "items": [
               {
-                "id": "https://imageserver.j-images.ch/iiif/flyer_04/annotation/p3-image",
+                "id": "https://imageserver.j-images.ch/iiif/flyer_09/annotation/p3-image",
                 "type": "Annotation",
                 "motivation": "painting",
                 "body": {
-                  "id": "https://imageserver.j-images.ch/images/iiif/3/flyer_10.jpg/full/max/0/default.jpg",
+                  "id": "https://imageserver.j-images.ch/images/iiif/3/flyer_24.jpg/full/max/0/default.jpg",
                   "type": "Image",
                   "format": "image/jpeg",
                   "service": [
                     {
-                      "id": "https://imageserver.j-images.ch/images/iiif/3/flyer_10.jpg",
+                      "id": "https://imageserver.j-images.ch/images/iiif/3/flyer_24.jpg",
                       "type": "ImageService3",
                       "profile": "level2"
                     }
                   ],
                   "height": 1200,
-                  "width": 830
+                  "width": 910
                 },
-                "target": "https://imageserver.j-images.ch/iiif/flyer_04/canvas/p3"
+                "target": "https://imageserver.j-images.ch/iiif/flyer_09/canvas/p3"
               }
             ]
           }
