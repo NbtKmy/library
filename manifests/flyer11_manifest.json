@@ -1,0 +1,119 @@
+{
+    "@context": "http://iiif.io/api/presentation/3/context.json",
+    "id": "https://nbtkmy.github.io/library/manifests/flyer11_manifest.json",
+    "type": "Manifest",
+    "label": { "ja": [ "日軍将兵諸君 / 残されし小舟に陸軍べそをかく" ] },
+    "metadata": [
+      {
+        "label": { "en": [ "Creator" ] },
+        "value": { "none": [ "USA" ] }
+      },
+      {
+        "label": { "en": [ "Created" ] },
+        "value": {
+          "en": [ "USA, ca. 1944" ]
+        }
+      },
+      {
+        "label": { "en": [ "Source" ] },
+        "value": { "none": [ "<span>Metadata from: <a href=\"https://uzb.swisscovery.slsp.ch/permalink/41SLSP_UZB/rloemb/alma990110955580205508\">Library catalogue</a></span>" ] }
+      }
+    ],  
+    "thumbnail": [
+      {
+        "id": "https://imageserver.j-images.ch/images/iiif/3/flyer_27.jpg/full/80,100/0/default.jpg",
+        "type": "Image",
+        "format": "image/jpeg",
+        "service": [
+          {
+            "id": "https://imageserver.j-images.ch/images/iiif/3/flyer_27.jpg",
+            "type": "ImageService3",
+            "profile": "level2"
+          }
+        ]
+      }
+    ],
+    "viewingDirection": "top-to-bottom",
+    "behavior": [ "individuals" ],
+    "rights": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "requiredStatement": {
+      "label": { "en": [ "Attribution" ] },
+      "value": { "en": [ "Digital image provided by AOI-Bibliothek" ] }
+    },
+    "start": {
+      "id": "https://imageserver.j-images.ch/iiif/flyer_11/canvas/p1",
+      "type": "Canvas"
+    },
+    "items": [
+      {
+        "id": "https://imageserver.j-images.ch/iiif/flyer_11/canvas/p1",
+        "type": "Canvas",
+        "label": { "none": [ "p. 1" ] },
+        "height": 1137,
+        "width": 1200,
+        "items": [
+          {
+            "id": "https://imageserver.j-images.ch/iiif/flyer_11/page/p1",
+            "type": "AnnotationPage",
+            "items": [
+              {
+                "id": "https://imageserver.j-images.ch/iiif/flyer_11/annotation/p1-image",
+                "type": "Annotation",
+                "motivation": "painting",
+                "body": {
+                  "id": "https://imageserver.j-images.ch/images/iiif/3/flyer_27.jpg/full/max/0/default.jpg",
+                  "type": "Image",
+                  "format": "image/jpeg",
+                  "service": [
+                    {
+                      "id": "https://imageserver.j-images.ch/images/iiif/3/flyer_27.jpg",
+                      "type": "ImageService3",
+                      "profile": "level2"
+                    }
+                  ],
+                  "height": 1137,
+                  "width": 1200
+                },
+                "target": "https://imageserver.j-images.ch/iiif/flyer_11/canvas/p1"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "https://imageserver.j-images.ch/iiif/flyer_11/canvas/p2",
+        "type": "Canvas",
+        "label": { "none": [ "p. 2" ] },
+        "height": 1137,
+        "width": 1200,
+        "items": [
+          {
+            "id": "https://imageserver.j-images.ch/iiif/flyer_11/page/p2",
+            "type": "AnnotationPage",
+            "items": [
+              {
+                "id": "https://imageserver.j-images.ch/iiif/flyer_11/annotation/p2-image",
+                "type": "Annotation",
+                "motivation": "painting",
+                "body": {
+                  "id": "https://imageserver.j-images.ch/images/iiif/3/flyer_28.jpg/full/max/0/default.jpg",
+                  "type": "Image",
+                  "format": "image/jpeg",
+                  "service": [
+                    {
+                      "id": "https://imageserver.j-images.ch/images/iiif/3/flyer_28.jpg",
+                      "type": "ImageService3",
+                      "profile": "level2"
+                    }
+                  ],
+                  "height": 1137,
+                  "width": 1200
+                },
+                "target": "https://imageserver.j-images.ch/iiif/flyer_11/canvas/p2"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
