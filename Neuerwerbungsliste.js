@@ -6,7 +6,7 @@ function Neuerwerbung(Prefix, YoderM) {
     const Datum = d.toISOString();
     // ISO-String z.B. "2022-02-18T13:38:17.783Z"
     const Jahr = Datum.slice(0,4);
-    console.log(Jahr);
+    //console.log(Jahr);
     const Monat = Datum.slice(5,7);
     
     // Letztes Jahr
