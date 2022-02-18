@@ -19,5 +19,5 @@ https://nbtkmy.github.io/library/images.html
     * IIIF image server: [Cantaloupe](https://cantaloupe-project.github.io/)  
     * IIIF image viewer: [Mirador](https://projectmirador.org/)  
 
-* Neuerwerbungsliste Test
+* Neuerwerbungsliste Test  
 https://nbtkmy.github.io/library/Neuerwerbungsliste_test.html
