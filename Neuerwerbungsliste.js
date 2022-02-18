@@ -1,11 +1,11 @@
-// Das Variabel YoderM soll "y (dieses Jahr)", "m (dieser Monat)", "ly (letztes Jahr)" oder "lm (letzter Monat)" eingegeben werden
+// Das Variabel YoderM soll "y (dieses Jahr)", "m (dieser Monat)", "ly (letztes Jahr)", "lm (letzter Monat)" oder "l3m (letzte 3 Monate)" eingegeben werden
 function Neuerwerbung(Prefix, YoderM) {
     
     // Datum heute
     const d = new Date(Date.now());
     const Datum = d.toISOString();
     // ISO-String z.B. "2022-02-18T13:38:17.783Z"
-    const Jahr = Datum.slice(0,4);
+    let Jahr = Datum.slice(0,4);
     //console.log(Jahr);
     const Monat = Datum.slice(5,7);
     
@@ -20,7 +20,7 @@ function Neuerwerbung(Prefix, YoderM) {
     const LetzterMonat = ("0" + lm).slice(-2);
     
 
-    let Suchstring;
+    let Suchstring = "";
 
     switch (YoderM){
         case "y":
@@ -40,6 +40,27 @@ function Neuerwerbung(Prefix, YoderM) {
                 Suchstring = Prefix + LetztesJahr + "12" + "*";
             } else {
                 Suchstring = Prefix + Jahr + LetzterMonat + "*";
+            }
+            break;
+        
+        case "l3m":
+            for (let i = 1; i < 4 ; i++) {
+                let xm = mnum - i;
+                console.log(xm);
+                if (xm < 1){
+                    xm = 12 + xm;
+                    Jahr = LetztesJahr;
+                }
+
+                let xm_string;
+
+                if (i == 3){
+                    xm_string = ("0" + xm).slice(-2);
+                    Suchstring += Prefix + Jahr + xm_string + "*";
+                    break;
+                }
+                xm_string = ("0" + xm).slice(-2);
+                Suchstring += Prefix + Jahr + xm_string + "*" + " OR ";
             }
             break;
     }
