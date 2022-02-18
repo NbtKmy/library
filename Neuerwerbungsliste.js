@@ -46,7 +46,7 @@ function Neuerwerbung(Prefix, YoderM) {
         case "l3m":
             for (let i = 1; i < 4 ; i++) {
                 let xm = mnum - i;
-                //console.log(xm);
+                console.log(xm);
                 if (xm < 1){
                     xm = 12 + xm;
                     Jahr = LetztesJahr;
