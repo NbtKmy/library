@@ -1,6 +1,6 @@
 {
 	"@context": "http://iiif.io/api/presentation/2/context.json",
-	"@id": "http://cc1b0aa4-c4cf-4f2b-8dda-5dfc75adf3d5",
+	"@id": "https://nbtkmy.github.io/library/manifests/manifest_kyoto.json",
 	"@type": "sc:Manifest",
 	"label": [
 		"Kyôto shigun meisho shinzu",
