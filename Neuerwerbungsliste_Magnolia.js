@@ -68,7 +68,7 @@ function Neuerwerbung(Prefix, YoderM) {
     const linkPart1 = "https://uzb.swisscovery.slsp.ch/discovery/search?tab=41SLSP_UZB_DN_and_CI&search_scope=DN_and_CI&vid=41SLSP_UZB:UZB&offset=0&query=any,contains,";
     let link = linkPart1 + Suchstring;
     return link;
-	//window.open("https://uzb.swisscovery.slsp.ch/discovery/search?tab=41SLSP_UZB_DN_and_CI&search_scope=DN_and_CI&vid=41SLSP_UZB:UZB&offset=0&query=any,contains," + Suchstring);
+
 }
 
 // Linkliste erstellen
@@ -83,7 +83,7 @@ $(function(){
         
         let prefix = $(this).attr('class').split(" ")[1];
         let text = $(this).attr('id');
-        
+        // Die 2te Variable: "y (dieses Jahr)", "m (dieser Monat)", "ly (letztes Jahr)", "lm (letzter Monat)" oder "l3m (letzte 3 Monate)
         let url = Neuerwerbung(prefix, 'lm')
 
         ancContents += '<li><a href=' + url + '>' + text + '</a></li>';
