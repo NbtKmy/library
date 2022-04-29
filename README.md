@@ -21,3 +21,17 @@ https://nbtkmy.github.io/library/images.html
 
 * Neuerwerbungsliste Test  
 https://nbtkmy.github.io/library/Neuerwerbungsliste_test.html
+
+## Shell script  
+
+rw2_to_jpg.sh  
+Diese Shell script konvertiert die RW2-Daten in jpg-Format.
+
+Requirements:
+* dcraw
+* cjpeg
+
+Usage: 
+`./rw2_to_jpg.sh /path/to/your/folder/with/RW2/data`
+
+
