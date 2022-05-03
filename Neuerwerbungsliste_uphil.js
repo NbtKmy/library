@@ -59,13 +59,16 @@ $(function(){
     let ancElments = $('#uphil .link');
     
 
-    ancContents = '';
+    // Entweder
+    //ancContents = '';
+    // oder
+    ancContents = '<li><a href="https://www.ub.uzh.ch/de/contact/anschaffungsvorschlag.html" target="_blank">Anschaffungsvorschlag</a></li>'
     
     $.each(ancElments,function(){
         
         let mon = Number($(this).attr('class').split(" ")[1]);
         let return_arr = Neuerwerbung_UPHIL(mon);
-        console.log(return_arr);
+        //console.log(return_arr);
         let text = "Neuerwerbungen: " + return_arr[1];
     
 
