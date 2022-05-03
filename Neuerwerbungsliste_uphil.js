@@ -75,7 +75,8 @@ $(function(){
         ancContents += '<li><a href=' + return_arr[0] + ' target="_blank" >' + text + '</a></li>';
     });
     
+    const philLink = '<ul><li><a href="https://www.philosophie.uzh.ch/de.html" target="_blank">Philosophisches Seminar</a></li></ul>';
 
-    anchor.empty().append('<ul>' + ancContents + '</ul>');
+    anchor.empty().append('<ul>' + ancContents + '</ul>' + philLink);
     
 });
