@@ -86,7 +86,7 @@ $(function(){
         // Die 2te Variable: "y (dieses Jahr)", "m (dieser Monat)", "ly (letztes Jahr)", "lm (letzter Monat)" oder "l3m (letzte 3 Monate)
         let url = Neuerwerbung(prefix, 'lm')
 
-        ancContents += '<li><a href=' + url + '>' + text + '</a></li>';
+        ancContents += '<li><a href=' + url + ' target="_blank" rel="noopener noreferrer">' + text + '</a></li>';
     });
     
 

@@ -62,7 +62,7 @@ $(function(){
     // Entweder
     //ancContents = '';
     // oder
-    ancContents = '<li><a href="https://www.ub.uzh.ch/de/contact/anschaffungsvorschlag.html" target="_blank">Anschaffungsvorschlag</a></li>'
+    ancContents = '<li><a href="https://www.ub.uzh.ch/de/contact/anschaffungsvorschlag.html" target="_blank" rel="noopener noreferrer">Anschaffungsvorschlag</a></li>'
     
     $.each(ancElments,function(){
         
@@ -72,10 +72,10 @@ $(function(){
         let text = "Neuerwerbungen: " + return_arr[1];
     
 
-        ancContents += '<li><a href=' + return_arr[0] + ' target="_blank" >' + text + '</a></li>';
+        ancContents += '<li><a href=' + return_arr[0] + ' target="_blank" rel="noopener noreferrer">' + text + '</a></li>';
     });
     
-    const philLink = '<ul><li><a href="https://www.philosophie.uzh.ch/de.html" target="_blank">Philosophisches Seminar</a></li></ul>';
+    const philLink = '<ul><li><a href="https://www.philosophie.uzh.ch/de.html" target="_blank" rel="noopener noreferrer">Philosophisches Seminar</a></li></ul>';
 
     anchor.empty().append('<ul>' + ancContents + '</ul>' + philLink);
     
