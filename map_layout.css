@@ -1,0 +1,39 @@
+@charset "UTF-8";
+#map { height: 500px; }
+
+
+.icon_fig{
+    position:absolute;
+    width:18px;
+    height:18px;
+    border:solid 1px;
+    background:currentColor;
+    border-radius:10px 10px 10px 0;
+    box-sizing:content-box;
+}
+.icon_fig::after{
+    content:'';
+    position:absolute;
+    width:8px;
+    height:8px;
+    left:6px;
+    top:6px;
+    background-color:rgba(255, 255, 255, 0.7); 
+    border-radius:4px;
+}
+
+.marker_orange{
+    background-color:#ffd700;
+    color:#ffd700;
+    border-color:#800000;
+}
+.marker_violet{
+    background-color:#6a5acd;
+    color:#6a5acd;
+    border-color:#4b0082;
+}
+.marker_green{
+    background-color:#32cd32;
+    color:#32cd32;
+    border-color:#006400;
+}
