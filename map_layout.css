@@ -9,6 +9,7 @@
     border:solid 1px;
     background:currentColor;
     border-radius:10px 10px 10px 0;
+    transform:rotate(-45deg);
     box-sizing:content-box;
 }
 .icon_fig::after{
@@ -36,4 +37,10 @@
     background-color:#32cd32;
     color:#32cd32;
     border-color:#006400;
+}
+
+.marker_blue{
+    background-color:#6495ed;
+    color:#6495ed;
+    border-color:#191970;
 }
