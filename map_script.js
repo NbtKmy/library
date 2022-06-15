@@ -1,5 +1,5 @@
-// take an array and return geoJson. arr = array object. num = integer for properties.bereich
-function getBereich(arr, num){
+// Bereich und dessen Layer erhalten
+function getBereichAndLayer(arr, num){
     let filteredLibrary = arr.filter(function (obj){
         if (obj.properties.bereich == num){
             return true;
@@ -12,7 +12,18 @@ function getBereich(arr, num){
         features: filteredLibrary
     };
 
-    return bereichJson;
+    return L.geoJSON(bereichJson, {
+        pointToLayer: function(pointFeature, latlng) {
+            let col = pointFeature.properties.color;
+            let myIcon = L.divIcon({iconSize: [20, 20], className: 'icon_fig marker_' + col});     
+            return L.marker(latlng, {icon: myIcon});
+        }
+    }).bindPopup(function (layer) {
+        let ubName = layer.feature.properties.name;
+        let imageUrl = layer.feature.properties.imageUrl;
+        var popupContent = ubName + '<br><img src=' + imageUrl + ' style="width:200px;"></img>';
+        return popupContent;
+    }).addTo(map);
 }
 
 
@@ -35,74 +46,21 @@ request.onload = function() {
     let data = request.response;
     let features = data.features; 
 
-    let bereich1 = getBereich(features, 1);
-    let bereich2 = getBereich(features, 2);
-    let bereich3 = getBereich(features, 3);
-    let bereich6 = getBereich(features, 6);
+    let bereich1 = getBereichAndLayer(features, 1);
+    let bereich2 = getBereichAndLayer(features, 2);
+    let bereich3 = getBereichAndLayer(features, 3);
+    let bereich6 = getBereichAndLayer(features, 6);
 
-
-    let layer1 = L.geoJSON(bereich1, {
-        pointToLayer: function(pointFeature, latlng) {
-            let col = pointFeature.properties.color;
-            let myIcon = L.divIcon({iconSize: [20, 20], className: 'icon_fig marker_' + col});     
-            return L.marker(latlng, {icon: myIcon});
-        }
-    }).bindPopup(function (layer) {
-        let ubName = layer.feature.properties.name;
-        let imageUrl = layer.feature.properties.imageUrl;
-        var popupContent = ubName + '<br><img src=' + imageUrl + ' style="width:200px;"></img>';
-        return popupContent;
-    }).addTo(map);
-  
-
-  let layer2 = L.geoJSON(bereich2, {
-    pointToLayer: function(pointFeature, latlng) {
-        let col = pointFeature.properties.color;
-        let myIcon = L.divIcon({iconSize: [20, 20], className: 'icon_fig marker_' + col});     
-        return L.marker(latlng, {icon: myIcon});
-    }
-}).bindPopup(function (layer) {
-    let ubName = layer.feature.properties.name;
-    let imageUrl = layer.feature.properties.imageUrl;
-    var popupContent = ubName + '<br><img src=' + imageUrl + ' style="width:200px;"></img>';
-    return popupContent;
-}).addTo(map);
-
-let layer3 = L.geoJSON(bereich3, {
-    pointToLayer: function(pointFeature, latlng) {
-        let col = pointFeature.properties.color;
-        let myIcon = L.divIcon({iconSize: [20, 20], className: 'icon_fig marker_' + col});     
-        return L.marker(latlng, {icon: myIcon});
-    }
-}).bindPopup(function (layer) {
-    let ubName = layer.feature.properties.name;
-    let imageUrl = layer.feature.properties.imageUrl;
-    var popupContent = ubName + '<br><img src=' + imageUrl + ' style="width:200px;"></img>';
-    return popupContent;
-}).addTo(map);
-
-let layer6 = L.geoJSON(bereich6, {
-    pointToLayer: function(pointFeature, latlng) {
-        let col = pointFeature.properties.color;
-        let myIcon = L.divIcon({iconSize: [20, 20], className: 'icon_fig marker_' + col});     
-        return L.marker(latlng, {icon: myIcon});
-    }
-}).bindPopup(function (layer) {
-    let ubName = layer.feature.properties.name;
-    let imageUrl = layer.feature.properties.imageUrl;
-    var popupContent = ubName + '<br><img src=' + imageUrl + ' style="width:200px;"></img>';
-    return popupContent;
-}).addTo(map);
 
 let baseLayer = {
     'Open Street Map': openStreetMap
 };
 
 let overlayLayer = {
-    'Bereich 1': layer1,
-    'Bereich 2': layer2,
-    'Bereich 3': layer3,
-    'Bereich 6': layer6
+    'Bereich 1': bereich1,
+    'Bereich 2': bereich2,
+    'Bereich 3': bereich3,
+    'Bereich 6': bereich6
 }
 
 
