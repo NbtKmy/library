@@ -12,11 +12,12 @@ function getBereichAndLayer(arr, num){
         features: filteredLibrary
     };
 
+    // using Leaflet Rotated Marker by bbecquet (https://github.com/bbecquet/Leaflet.RotatedMarker)
     return L.geoJSON(bereichJson, {
         pointToLayer: function(pointFeature, latlng) {
             let col = pointFeature.properties.color;
             let myIcon = L.divIcon({iconSize: [20, 20], className: 'icon_fig marker_' + col});     
-            return L.marker(latlng, {icon: myIcon});
+            return L.marker(latlng, {icon: myIcon, rotationAngle: -45});
         }
     }).bindPopup(function (layer) {
         let ubName = layer.feature.properties.name;
@@ -52,20 +53,20 @@ request.onload = function() {
     let bereich6 = getBereichAndLayer(features, 6);
 
 
-let baseLayer = {
-    'Open Street Map': openStreetMap
-};
+    let baseLayer = {
+        'Open Street Map': openStreetMap
+    };
 
-let overlayLayer = {
-    'Bereich 1': bereich1,
-    'Bereich 2': bereich2,
-    'Bereich 3': bereich3,
-    'Bereich 6': bereich6
-}
-
-
-  L.control.layers( baseLayer, overlayLayer, {
-    collapsed: false,
+    let overlayLayer = {
+        'Bereich 1': bereich1,
+        'Bereich 2': bereich2,
+        'Bereich 3': bereich3,
+        'Bereich 6': bereich6
     }
-  ).addTo(map);
+
+
+    L.control.layers( baseLayer, overlayLayer, {
+        collapsed: false,
+        }
+    ).addTo(map);
 }
