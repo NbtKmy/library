@@ -36,6 +36,8 @@ var openStreetMap = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.
     attribution: '© OpenStreetMap'
 }).addTo(map);
 
+
+// if a local json file exists, the variable "requestURL" should be the path to the local json file
 // get geoJson daten
 let requestURL = 'https://script.google.com/macros/s/AKfycbw4LuhP8G-S_VOAoiuUhHJK5wWdjg-JNYt9ViX1eVt1AcDx2VhWur0QUXPGli3i1lqi/exec';
 let request = new XMLHttpRequest();
