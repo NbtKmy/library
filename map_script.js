@@ -1,3 +1,26 @@
+// Die gegenwärtige Position herausfinden und ein Route-Finder-Link von Google erstellen & Öffnen 
+
+function routeFinder(address){
+
+    navigator.geolocation.getCurrentPosition(function (position){
+        successCallback(position, address);
+    }, errorCallback);
+}
+
+function successCallback(position, address) {
+
+    let latlong = String(position.coords.latitude) + ',' + String(position.coords.longitude) + '&destination=';
+    const routeFinderPrefix = 'https://www.google.com/maps/dir/?api=1&origin=';
+
+    const routeUrl = routeFinderPrefix + latlong + address;
+    //console.log(latlong);
+    window.open(routeUrl);
+}
+
+function errorCallback(error) {
+    alert("GPS inaktiv!");
+}
+
 // Bereich und dessen Layer erhalten
 function getBereichAndLayer(arr, num){
     let filteredLibrary = arr.filter(function (obj){
@@ -22,18 +45,25 @@ function getBereichAndLayer(arr, num){
     }).bindPopup(function (layer) {
         let ubName = layer.feature.properties.name;
         let imageUrl = layer.feature.properties.imageUrl;
-        var popupContent = ubName + '<br><img src=' + imageUrl + ' style="width:200px;"></img>';
+        let address = String(layer.feature.properties.address);
+        var popupContent = ubName + '<br><img src=' + imageUrl + ` style="width:200px;"></img><br><a href="javascript:routeFinder('${address}');">Wegweiser via Google</a>`;
         return popupContent;
     }).addTo(map);
 }
 
+///////////
+// main ///
+///////////
 
-// main 
 var map = L.map('map').setView([47.37174,  8.54226], 11);
 
 var openStreetMap = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 19,
     attribution: '© OpenStreetMap'
+}).addTo(map);
+
+var GoogleMap = L.tileLayer('https://mt1.google.com/vt/lyrs=r&x={x}&y={y}&z={z}', {
+	attribution: "<a href='https://developers.google.com/maps/documentation' target='_blank'>Google Map</a>"
 }).addTo(map);
 
 
@@ -58,7 +88,8 @@ request.onload = function() {
 
 
     let baseLayer = {
-        'Open Street Map': openStreetMap
+        'Open Street Map': openStreetMap,
+        'Google Map': GoogleMap
     };
 
     let overlayLayer = {
