@@ -52,6 +52,8 @@ request.onload = function() {
     let bereich1 = getBereichAndLayer(features, 1);
     let bereich2 = getBereichAndLayer(features, 2);
     let bereich3 = getBereichAndLayer(features, 3);
+    let bereich4 = getBereichAndLayer(features, 4);
+    let bereich5 = getBereichAndLayer(features, 5);
     let bereich6 = getBereichAndLayer(features, 6);
 
 
@@ -63,6 +65,8 @@ request.onload = function() {
         'Bereich 1': bereich1,
         'Bereich 2': bereich2,
         'Bereich 3': bereich3,
+        'Bereich 4': bereich4,
+        'Bereich 5': bereich5,
         'Bereich 6': bereich6
     }
 

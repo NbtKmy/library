@@ -44,3 +44,15 @@
     color:#6495ed;
     border-color:#191970;
 }
+
+.marker_red{
+    background-color:#ff0000;
+    color:#ff0000;
+    border-color:#dc143c;
+}
+
+.marker_pink{
+    background-color:#ffc0cb;
+    color:#ffc0cb;
+    border-color:#db7093;
+}
