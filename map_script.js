@@ -5,11 +5,11 @@
 function routeFinder(address){
 
     navigator.geolocation.getCurrentPosition(function (position){
-        successCallback(position, address, windowReference);
+        successCallback(position, address);
     }, errorCallback);
 }
 
-function successCallback(position, address, windowReference) {
+function successCallback(position, address) {
 
     let latlong = String(position.coords.latitude) + ',' + String(position.coords.longitude) + '&destination=';
     const routeFinderPrefix = 'https://www.google.com/maps/dir/?api=1&origin=';
