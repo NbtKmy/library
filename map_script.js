@@ -51,9 +51,9 @@ function getBereichAndLayer(arr, num){
     }).addTo(map);
 }
 
-///////////
-// main ///
-///////////
+//////////
+// main //
+//////////
 
 var map = L.map('map').setView([47.37174,  8.54226], 11);
 
