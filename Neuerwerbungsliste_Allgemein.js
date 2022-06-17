@@ -3,14 +3,14 @@
 function Neuerwerbung_Allgemein(mon, lang) {
     
     // Sucheinstellung 
-    // Prefix von Suchstring: Prefix für die UB ist definitiv vorhanden
+    // Prefix von Suchstring für den UB-Bestand. Das Prefix für die UB ist obligatorisch
     var Suchstring = "UAOII-";
     // Prefix für den ZB-Bestand ist faklutativ
     // Wenn ZB-Bestand aufgelistet werden soll
     var SuchstringZB = "Z01SE";
-    var SuchstringZBDDC = "200"; // Muss die DDC-Ziffer (3-stellige Zahl) als String definiert sein wie "200" 
+    var SuchstringZBDDC = "200"; // Die DDC-Ziffer (3-stellige Zahl) muss als String definiert sein wie "200" 
     // Wenn kein ZB-Bestand aufgelistet wird, 
-    // sollen die oberen 2 Zeilen "comment out" gemacht und die unteren 2 Zeilen aktiviert, indem man "//"-Zeichen hinzufügt oder löscht 
+    // sollen die oberen 2 Zeilen (Zeile 10 und 11) "comment out" gemacht und die unteren 2 Zeilen aktiviert werden, indem man "//"-Zeichen links hinzufügt oder löscht 
     // var SuchstringZB;
     // var SuchstringZBDDC;
     
