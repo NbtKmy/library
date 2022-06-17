@@ -1,7 +1,8 @@
-// Die gegenwärtige Position herausfinden und ein Route-Finder-Link von Google erstellen & Öffnen 
+///////////////////////////////////////
+///// For the route finder-pop-up /////
+///////////////////////////////////////
 
 function routeFinder(address){
-    
 
     navigator.geolocation.getCurrentPosition(function (position){
         successCallback(position, address, windowReference);
@@ -23,7 +24,10 @@ function errorCallback(error) {
     alert("GPS inaktiv!");
 }
 
-// Bereich und dessen Layer erhalten
+////////////////////////////////////////////
+///// Get library categories as layers /////
+////////////////////////////////////////////
+
 function getBereichAndLayer(arr, num){
     let filteredLibrary = arr.filter(function (obj){
         if (obj.properties.bereich == num){
@@ -47,15 +51,16 @@ function getBereichAndLayer(arr, num){
     }).bindPopup(function (layer) {
         let ubName = layer.feature.properties.name;
         let imageUrl = layer.feature.properties.imageUrl;
+        let iframeUrl = layer.feature.properties.iframe;
         let address = String(layer.feature.properties.address);
-        var popupContent = ubName + '<br><img src=' + imageUrl + ` style="width:200px;"></img><br><a href="javascript:routeFinder('${address}');">Wegweiser via Google</a>`;
+        var popupContent = ubName + '<br><img src=' + imageUrl + ` style="width:300px;"></img><br><a href="javascript:routeFinder('${address}');">Wegweiser via Google (Bitte Pop-up erlauben)</a><br><iframe src="${iframeUrl}" style="width: 300px;height: 100px;" scrolling="yes" frameborder="0">Ihr Browser unterstützt iframes leider nicht.</iframe>`;
         return popupContent;
     }).addTo(map);
 }
 
-//////////
-// main //
-//////////
+////////////////
+///// main /////
+////////////////
 
 var map = L.map('map').setView([47.37174,  8.54226], 11);
 
@@ -70,7 +75,7 @@ var GoogleMap = L.tileLayer('https://mt1.google.com/vt/lyrs=r&x={x}&y={y}&z={z}'
 
 
 // if a local json file exists, the variable "requestURL" should be the path to the local json file
-// get geoJson daten
+// get geoJson data
 let requestURL = 'https://script.google.com/macros/s/AKfycbw4LuhP8G-S_VOAoiuUhHJK5wWdjg-JNYt9ViX1eVt1AcDx2VhWur0QUXPGli3i1lqi/exec';
 let request = new XMLHttpRequest();
 request.open('GET', requestURL);
@@ -102,7 +107,6 @@ request.onload = function() {
         'Bereich 5': bereich5,
         'Bereich 6': bereich6
     }
-
 
     L.control.layers( baseLayer, overlayLayer, {
         collapsed: false,
