@@ -1,19 +1,21 @@
 // Die gegenwärtige Position herausfinden und ein Route-Finder-Link von Google erstellen & Öffnen 
 
 function routeFinder(address){
+    
 
     navigator.geolocation.getCurrentPosition(function (position){
-        successCallback(position, address);
+        successCallback(position, address, windowReference);
     }, errorCallback);
 }
 
-function successCallback(position, address) {
+function successCallback(position, address, windowReference) {
 
     let latlong = String(position.coords.latitude) + ',' + String(position.coords.longitude) + '&destination=';
     const routeFinderPrefix = 'https://www.google.com/maps/dir/?api=1&origin=';
 
     const routeUrl = routeFinderPrefix + latlong + address;
-    //console.log(latlong);
+    //console.log(routeUrl);
+    // Safari in iOS should allow Pop-ups
     window.open(routeUrl);
 }
 

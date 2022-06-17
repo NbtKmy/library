@@ -23,6 +23,7 @@ https://nbtkmy.github.io/library/images.html
 https://nbtkmy.github.io/library/Neuerwerbungsliste_test.html
 
 * Map Test
+Wegen der Wegweiser-Funktion muss Safari in iOS Pop-up erlauben 
 https://nbtkmy.github.io/library/map_test.html
 
 ## Shell script  
