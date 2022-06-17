@@ -1,14 +1,19 @@
 // mon = 1 bedeutet letzter Monat, mon = 2 bedeutet vorvorletzter Monat usw.
 // lang = ISO 639-1 Code entweder de oder en...
 function Neuerwerbung_Allgemein(mon, lang) {
-    //
-    // Prefix von Suchstring: Prefix von der UB ist definitiv vorhanden
+    
+    // Sucheinstellung 
+    // Prefix von Suchstring: Prefix für die UB ist definitiv vorhanden
     var Suchstring = "UAOII-";
     // Prefix für den ZB-Bestand ist faklutativ
+    // Wenn ZB-Bestand aufgelistet werden soll
     var SuchstringZB = "Z01SE";
     var SuchstringZBDDC = "200"; // Muss die DDC-Ziffer (3-stellige Zahl) als String definiert sein wie "200" 
+    // Wenn kein ZB-Bestand aufgelistet wird, 
+    // sollen die oberen 2 Zeilen "comment out" gemacht und die unteren 2 Zeilen aktiviert, indem man "//"-Zeichen hinzufügt oder löscht 
+    // var SuchstringZB;
+    // var SuchstringZBDDC;
     
-    //console.log(mon);
     // Datum heute
     const d = new Date(Date.now());
     const Datum = d.toISOString();
@@ -66,20 +71,20 @@ function Neuerwerbung_Allgemein(mon, lang) {
     return return_arr;
 }
 
-// Linkliste erstellen
+// Linkliste erstellen und DOM in HTML hineinschieben
 $(function(){
     let anchor = $('#erwerbungsListe'); 
     let ancElments = $('#erwerbungsListe .link');
     let lang = document.documentElement.lang;
-    //console.log(lang);
+
     let contentsListe;
     $.each(ancElments,function(){
         
         let mon = Number($(this).attr('class').split(" ")[1]);
         let return_arr = Neuerwerbung_Allgemein(mon, lang);
-        //console.log(return_arr);
+
         let text = return_arr[3] + return_arr[1];
-        //console.log(contentsListe);
+
         if (contentsListe === undefined){
             contentsListe = return_arr[2] + '<li><a href=' + return_arr[0] + ' target="_blank" rel="noopener noreferrer">' + text + '</a></li>';
         } else {
