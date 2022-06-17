@@ -53,6 +53,7 @@ function getBereichAndLayer(arr, num){
         let imageUrl = layer.feature.properties.imageUrl;
         let iframeUrl = layer.feature.properties.iframe;
         let address = String(layer.feature.properties.address);
+        // The iframe contents come from the server of the univ. this solution is not clean - it's only for now...
         var popupContent = ubName + '<br><img src=' + imageUrl + ` style="width:300px;"></img><br><a href="javascript:routeFinder('${address}');">Wegweiser via Google (Bitte Pop-up erlauben)</a><br><iframe src="${iframeUrl}" style="width: 300px;height: 100px;" scrolling="yes" frameborder="0">Ihr Browser unterstützt iframes leider nicht.</iframe>`;
         return popupContent;
     }).addTo(map);
