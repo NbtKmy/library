@@ -22,6 +22,9 @@ https://nbtkmy.github.io/library/images.html
 * Neuerwerbungsliste Test  
 https://nbtkmy.github.io/library/Neuerwerbungsliste_test.html
 
+* Map Test
+https://nbtkmy.github.io/library/map_test.html
+
 ## Shell script  
 
 **rw2_to_jpg.sh**  
