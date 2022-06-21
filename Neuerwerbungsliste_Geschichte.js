@@ -116,7 +116,7 @@ $(function(){
         if (contentsListe === undefined){
             contentsListe = '<li><a href=' + return_arr[0] + ' target="_blank" rel="noopener noreferrer">' + text1 + '</a></li><li><a href=' + return_arr[3] + ' target="_blank" rel="noopener noreferrer">' + text2 + '</a></li>';
         } else {
-            contentsListe += '<li></li><li><a href=' + return_arr[0] + ' target="_blank" rel="noopener noreferrer">' + text1 + '</a></li><li><a href=' + return_arr[3] + ' target="_blank" rel="noopener noreferrer">' + text2 + '</a></li>';
+            contentsListe += '<br><li><a href=' + return_arr[0] + ' target="_blank" rel="noopener noreferrer">' + text1 + '</a></li><li><a href=' + return_arr[3] + ' target="_blank" rel="noopener noreferrer">' + text2 + '</a></li>';
         }
     });
     
