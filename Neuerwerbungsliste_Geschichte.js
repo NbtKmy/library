@@ -32,7 +32,7 @@ function Neuerwerbung_Geschichte(mon, lang, ddc) {
     // Monat festlegen
     if (lang === "en"){
         var monate = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-        var fach = ["Geschichtswissenschaft", "Alte Geschichte", "Geschichte Europas", "Geschichte Asiens", "Geschichte Afrikas", "Geschichte Nordamerikas", "Geschichte Südamerikas"];
+        var fach = ["History", "History of the ancient world", "History of Europe", "History of Asia", "History of Africa", "History of North America", "History of South America"];
         var linkPart1 = "https://uzb.swisscovery.slsp.ch/discovery/search?tab=41SLSP_UZB_DN_and_CI&search_scope=DN_and_CI&vid=41SLSP_UZB:UZB&lang=en&offset=0&query=any,contains,";
         var ancContents = '<li><a href="https://www.ub.uzh.ch/en/contact/anschaffungsvorschlag.html" target="_blank" rel="noopener noreferrer">Acquisition proposal</a></li>';
         
@@ -116,7 +116,7 @@ $(function(){
         if (contentsListe === undefined){
             contentsListe = '<li><a href=' + return_arr[0] + ' target="_blank" rel="noopener noreferrer">' + text1 + '</a></li><li><a href=' + return_arr[3] + ' target="_blank" rel="noopener noreferrer">' + text2 + '</a></li>';
         } else {
-            contentsListe += '<br><li><a href=' + return_arr[0] + ' target="_blank" rel="noopener noreferrer">' + text1 + '</a></li><li><a href=' + return_arr[3] + ' target="_blank" rel="noopener noreferrer">' + text2 + '</a></li>';
+            contentsListe += '<li><a href=' + return_arr[0] + ' target="_blank" rel="noopener noreferrer">' + text1 + '</a></li><li><a href=' + return_arr[3] + ' target="_blank" rel="noopener noreferrer">' + text2 + '</a></li>';
         }
     });
     
