@@ -103,23 +103,35 @@ $(function(){
     let ancElments = $('#erwerbungsListe_Geschichte .link');
     let lang = document.documentElement.lang;
 
-    let contentsListe;
+    let contentsListeMonth, contentsListeYear, contentsAll, headlineMonth, headlineYear;
     $.each(ancElments,function(){
         
         let mon = Number($(this).attr('class').split(" ")[1]);
         let ddc = String($(this).attr('class').split(" ")[2]);
         let return_arr = Neuerwerbung_Geschichte(mon, lang, ddc);
 
-        let text1 = return_arr[4] + ": " + return_arr[1];
-        let text2 = return_arr[4] + ": " + return_arr[5];
+        headlineMonth = "Neuerwerbung in " + return_arr[1];
+        headlineYear = "Neuerwerbung in Jahr " + return_arr[5];
 
-        if (contentsListe === undefined){
-            contentsListe = '<li><a href=' + return_arr[0] + ' target="_blank" rel="noopener noreferrer">' + text1 + '</a></li><li><a href=' + return_arr[3] + ' target="_blank" rel="noopener noreferrer">' + text2 + '</a></li>';
+        let text1 = return_arr[4];
+        //let text2 = return_arr[4] + ": " + return_arr[5];
+
+        if (contentsListeMonth === undefined){
+            contentsListeMonth = '<li><a href=' + return_arr[0] + ' target="_blank" rel="noopener noreferrer">' + text1 + '</a></li>';
         } else {
-            contentsListe += '<li><a href=' + return_arr[0] + ' target="_blank" rel="noopener noreferrer">' + text1 + '</a></li><li><a href=' + return_arr[3] + ' target="_blank" rel="noopener noreferrer">' + text2 + '</a></li>';
+            contentsListeMonth += '<li><a href=' + return_arr[0] + ' target="_blank" rel="noopener noreferrer">' + text1 + '</a></li>';
+        }
+
+        if (contentsListeYear === undefined){
+            contentsListeYear = '<li><a href=' + return_arr[3] + ' target="_blank" rel="noopener noreferrer">' + text1 + '</a></li>';
+        } else {
+            contentsListeYear += '<li><a href=' + return_arr[3] + ' target="_blank" rel="noopener noreferrer">' + text1 + '</a></li>';
         }
     });
     
-    anchor.empty().append('<ul>' + contentsListe + '</ul>');
+    contentsListeMonth = '<h2>' + headlineMonth + '</h2><ul>' + contentsListeMonth + '</ul><br>';
+    contentsListeYear = '<h2>' + headlineYear + '</h2><ul>' + contentsListeYear + '</ul>';
+    contentsAll = contentsListeMonth + contentsListeYear;
+    anchor.empty().append(contentsAll);
     
 });
