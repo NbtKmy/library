@@ -71,25 +71,24 @@ function Neuerwerbung(Prefix, YoderM) {
 
 }
 
+
+
 // Linkliste erstellen
-$(function(){
-    let anchor = $('#test'); 
-    let ancElments = $('#test .link');
-    
 
-    ancContents = '';
+window.addEventListener('DOMContentLoaded', function() {
+    let anchor = document.getElementById('test');
+    let ancElements = anchor.getElementsByClassName('link');
     
-    $.each(ancElments,function(){
-        
-        let prefix = $(this).attr('class').split(" ")[1];
-        let text = $(this).attr('id');
-        // Die 2te Variable: "y (dieses Jahr)", "m (dieser Monat)", "ly (letztes Jahr)", "lm (letzter Monat)" oder "l3m (letzte 3 Monate)
-        let url = Neuerwerbung(prefix, 'lm')
-
-        ancContents += '<li><a href=' + url + ' target="_blank" rel="noopener noreferrer">' + text + '</a></li>';
-    });
+    let ancContents = '';
     
-
-    anchor.empty().append('<ul>' + ancContents + '</ul>');
+    for (let i = 0; i < ancElements.length; i++) {
+      let prefix = ancElements[i].className.split(" ")[1];
+      let text = ancElements[i].getAttribute('id');
+      let url = Neuerwerbung(prefix, 'lm');
+      
+      ancContents += '<li><a href=' + url + ' target="_blank" rel="noopener noreferrer">' + text + '</a></li>';
+    }
     
-});
+    anchor.innerHTML = '<ul>' + ancContents + '</ul>';
+  });
+  
