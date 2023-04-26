@@ -54,29 +54,20 @@ function Neuerwerbung_UPHIL(mon) {
 }
 
 // Linkliste erstellen
-$(function(){
-    let anchor = $('#uphil'); 
-    let ancElments = $('#uphil .link');
+document.addEventListener("DOMContentLoaded", function() {
+    let anchor = document.querySelector('#uphil');
+    let ancElments = document.querySelectorAll('#uphil .link');
     
-
-    // Entweder
-    //ancContents = '';
-    // oder
-    ancContents = '<li><a href="https://www.ub.uzh.ch/de/contact/anschaffungsvorschlag.html" target="_blank" rel="noopener noreferrer">Anschaffungsvorschlag</a></li>'
+    let ancContents = '<li><a href="https://www.ub.uzh.ch/de/contact/anschaffungsvorschlag.html" target="_blank" rel="noopener noreferrer">Anschaffungsvorschlag</a></li>';
     
-    $.each(ancElments,function(){
-        
-        let mon = Number($(this).attr('class').split(" ")[1]);
+    ancElments.forEach(function(element) {
+        let mon = Number(element.classList[1]);
         let return_arr = Neuerwerbung_UPHIL(mon);
-        //console.log(return_arr);
         let text = "Neuerwerbungen: " + return_arr[1];
-    
-
         ancContents += '<li><a href=' + return_arr[0] + ' target="_blank" rel="noopener noreferrer">' + text + '</a></li>';
     });
     
     const philLink = '<ul><li><a href="https://www.philosophie.uzh.ch/de.html" target="_blank" rel="noopener noreferrer">Philosophisches Seminar</a></li></ul>';
-
-    anchor.empty().append('<ul>' + ancContents + '</ul>' + philLink);
     
+    anchor.innerHTML = '<ul>' + ancContents + '</ul>' + philLink;
 });
