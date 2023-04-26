@@ -58,32 +58,25 @@ function Neuerwerbung_UAOII_EN(mon, lang) {
 }
 
 // Linkliste erstellen
-$(function(){
-    let anchor = $('#uaoii_en'); 
-    let ancElments = $('#uaoii_en .link');
+document.addEventListener("DOMContentLoaded", function() {
+    let anchor = document.querySelector('#uaoii_en');
+    let ancElments = document.querySelectorAll('#uaoii_en .link');
     let lang = document.documentElement.lang;
     console.log(lang);
-
-    
-
-    // Entweder
-    //ancContents = '';
-    // oder
-    ancContents = '<li><a href="https://www.ub.uzh.ch/en/contact/anschaffungsvorschlag.html" target="_blank" rel="noopener noreferrer">Acquisition proposal</a></li>'
-    
-    $.each(ancElments,function(){
-        
-        let mon = Number($(this).attr('class').split(" ")[1]);
-        let return_arr = Neuerwerbung_UAOII_EN(mon, lang);
-        console.log(return_arr);
-        let text = "New acquisitions: " + return_arr[1];
-    
-
-        ancContents += '<li><a href=' + return_arr[0] + ' target="_blank" rel="noopener noreferrer">' + text + '</a></li>';
+  
+    let ancContents = '<li><a href="https://www.ub.uzh.ch/en/contact/anschaffungsvorschlag.html" target="_blank" rel="noopener noreferrer">Acquisition proposal</a></li>';
+  
+    ancElments.forEach(function(el) {
+      let mon = Number(el.classList[1]);
+      let return_arr = Neuerwerbung_UAOII_EN(mon, lang);
+      console.log(return_arr);
+      let text = "New acquisitions: " + return_arr[1];
+  
+      ancContents += '<li><a href=' + return_arr[0] + ' target="_blank" rel="noopener noreferrer">' + text + '</a></li>';
     });
     
     const islLink = '<ul><li><a href="https://www.aoi.uzh.ch/en/islamwissenschaft.html" target="_blank" rel="noopener noreferrer">Islamic Studies</a></li></ul>';
-
-    anchor.empty().append('<ul>' + ancContents + '</ul>' + islLink);
-    
-});
+  
+    anchor.innerHTML = '<ul>' + ancContents + '</ul>' + islLink;
+  });
+  

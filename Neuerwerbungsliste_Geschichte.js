@@ -98,40 +98,38 @@ function Neuerwerbung_Geschichte(mon, lang, ddc) {
 }
 
 // Linkliste erstellen und DOM in HTML hineinschieben
-$(function(){
-    let anchor = $('#erwerbungsListe_Geschichte'); 
-    let ancElments = $('#erwerbungsListe_Geschichte .link');
+document.addEventListener("DOMContentLoaded", function() {
+    let anchor = document.querySelector("#erwerbungsListe_Geschichte");
+    let ancElments = document.querySelectorAll("#erwerbungsListe_Geschichte .link");
     let lang = document.documentElement.lang;
-
+  
     let contentsListeMonth, contentsListeYear, contentsAll, headlineMonth, headlineYear;
-    $.each(ancElments,function(){
-        
-        let mon = Number($(this).attr('class').split(" ")[1]);
-        let ddc = String($(this).attr('class').split(" ")[2]);
-        let return_arr = Neuerwerbung_Geschichte(mon, lang, ddc);
-
-        headlineMonth = return_arr[1];
-        headlineYear = "Ganzes " + return_arr[5];
-
-        let text1 = return_arr[4];
-        //let text2 = return_arr[4] + ": " + return_arr[5];
-
-        if (contentsListeMonth === undefined){
-            contentsListeMonth = '<li><a href=' + return_arr[0] + ' target="_blank" rel="noopener noreferrer">' + text1 + '</a></li>';
-        } else {
-            contentsListeMonth += '<li><a href=' + return_arr[0] + ' target="_blank" rel="noopener noreferrer">' + text1 + '</a></li>';
-        }
-
-        if (contentsListeYear === undefined){
-            contentsListeYear = '<li><a href=' + return_arr[3] + ' target="_blank" rel="noopener noreferrer">' + text1 + '</a></li>';
-        } else {
-            contentsListeYear += '<li><a href=' + return_arr[3] + ' target="_blank" rel="noopener noreferrer">' + text1 + '</a></li>';
-        }
+    ancElments.forEach(function(el) {
+      let mon = Number(el.classList[1]);
+      let ddc = el.classList[2];
+      let return_arr = Neuerwerbung_Geschichte(mon, lang, ddc);
+  
+      headlineMonth = return_arr[1];
+      headlineYear = "Ganzes " + return_arr[5];
+  
+      let text1 = return_arr[4];
+  
+      if (contentsListeMonth === undefined) {
+        contentsListeMonth = '<li><a href=' + return_arr[0] + ' target="_blank" rel="noopener noreferrer">' + text1 + '</a></li>';
+      } else {
+        contentsListeMonth += '<li><a href=' + return_arr[0] + ' target="_blank" rel="noopener noreferrer">' + text1 + '</a></li>';
+      }
+  
+      if (contentsListeYear === undefined) {
+        contentsListeYear = '<li><a href=' + return_arr[3] + ' target="_blank" rel="noopener noreferrer">' + text1 + '</a></li>';
+      } else {
+        contentsListeYear += '<li><a href=' + return_arr[3] + ' target="_blank" rel="noopener noreferrer">' + text1 + '</a></li>';
+      }
     });
-    
-    contentsListeMonth = '<storng>' + headlineMonth + '</strong><ul>' + contentsListeMonth + '</ul><br>';
+  
+    contentsListeMonth = '<strong>' + headlineMonth + '</strong><ul>' + contentsListeMonth + '</ul><br>';
     contentsListeYear = '<strong>' + headlineYear + '</strong><ul>' + contentsListeYear + '</ul>';
     contentsAll = contentsListeMonth + contentsListeYear;
-    anchor.empty().append(contentsAll);
-    
-});
+    anchor.innerHTML = contentsAll;
+  });
+  

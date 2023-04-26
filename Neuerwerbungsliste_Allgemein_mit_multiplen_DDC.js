@@ -80,15 +80,14 @@ function Neuerwerbung_Allgemein_MultiDDC(mon, lang) {
 }
 
 // Linkliste erstellen und DOM in HTML hineinschieben
-$(function(){
-    let anchor = $('#erwerbungsListe_MultiDDC'); 
-    let ancElments = $('#erwerbungsListe_MultiDDC .link');
+window.addEventListener('DOMContentLoaded', function() {
+    let anchor = document.querySelector('#erwerbungsListe_MultiDDC'); 
+    let ancElments = document.querySelectorAll('#erwerbungsListe_MultiDDC .link');
     let lang = document.documentElement.lang;
 
     let contentsListe;
-    $.each(ancElments,function(){
-        
-        let mon = Number($(this).attr('class').split(" ")[1]);
+    ancElments.forEach(function(el) {
+        let mon = Number(el.classList[1]);
         let return_arr = Neuerwerbung_Allgemein_MultiDDC(mon, lang);
 
         let text = return_arr[3] + return_arr[1];
@@ -100,6 +99,5 @@ $(function(){
         }
     });
     
-    anchor.empty().append('<ul>' + contentsListe + '</ul>');
-    
+    anchor.innerHTML = '<ul>' + contentsListe + '</ul>';
 });

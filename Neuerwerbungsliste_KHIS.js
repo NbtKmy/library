@@ -71,26 +71,24 @@ function Neuerwerbung_KHIS(mon, lang) {
 }
 
 // Linkliste erstellen und DOM in HTML hineinschieben
-$(function(){
-    let anchor = $('#erwerbungsListe_KHIS'); 
-    let ancElments = $('#erwerbungsListe_KHIS .link');
+window.addEventListener('DOMContentLoaded', function() {
+    let anchor = document.getElementById('erwerbungsListe_KHIS');
+    let ancElements = anchor.getElementsByClassName('link');
     let lang = document.documentElement.lang;
-
+    
     let contentsListe;
-    $.each(ancElments,function(){
-        
-        let mon = Number($(this).attr('class').split(" ")[1]);
-        let return_arr = Neuerwerbung_KHIS(mon, lang);
-
-        let text = return_arr[3] + return_arr[1];
-
-        if (contentsListe === undefined){
-            contentsListe = return_arr[2] + '<li><a href=' + return_arr[0] + ' target="_blank" rel="noopener noreferrer">' + text + '</a></li>';
-        } else {
-            contentsListe += '<li><a href=' + return_arr[0] + ' target="_blank" rel="noopener noreferrer">' + text + '</a></li>';
-        }
-    });
+    for (let i = 0; i < ancElements.length; i++) {
+      let mon = Number(ancElements[i].className.split(" ")[1]);
+      let return_arr = Neuerwerbung_KHIS(mon, lang);
+      let text = return_arr[3] + return_arr[1];
+      
+      if (contentsListe === undefined) {
+        contentsListe = return_arr[2] + '<li><a href=' + return_arr[0] + ' target="_blank" rel="noopener noreferrer">' + text + '</a></li>';
+      } else {
+        contentsListe += '<li><a href=' + return_arr[0] + ' target="_blank" rel="noopener noreferrer">' + text + '</a></li>';
+      }
+    }
     
-    anchor.empty().append('<ul>' + contentsListe + '</ul>');
-    
-});
+    anchor.innerHTML = '<ul>' + contentsListe + '</ul>';
+  });
+  
