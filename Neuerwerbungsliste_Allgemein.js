@@ -72,6 +72,29 @@ function Neuerwerbung_Allgemein(mon, lang) {
 }
 
 // Linkliste erstellen und DOM in HTML hineinschieben
+document.addEventListener('DOMContentLoaded', function() {
+    let anchor = document.querySelector('#erwerbungsListe');
+    let ancElments = document.querySelectorAll('#erwerbungsListe .link');
+    let lang = document.documentElement.lang;
+
+    let contentsListe;
+
+    ancElments.forEach(function(element) {
+        let mon = Number(element.classList[1]);
+        let return_arr = Neuerwerbung_Allgemein(mon, lang);
+        let text = return_arr[3] + return_arr[1];
+
+        if (contentsListe === undefined) {
+            contentsListe = return_arr[2] + '<li><a href=' + return_arr[0] + ' target="_blank" rel="noopener noreferrer">' + text + '</a></li>';
+        } else {
+            contentsListe += '<li><a href=' + return_arr[0] + ' target="_blank" rel="noopener noreferrer">' + text + '</a></li>';
+        }
+    });
+
+    anchor.innerHTML = '<ul>' + contentsListe + '</ul>';
+});
+
+/*
 $(function(){
     let anchor = $('#erwerbungsListe'); 
     let ancElments = $('#erwerbungsListe .link');
@@ -95,3 +118,4 @@ $(function(){
     anchor.empty().append('<ul>' + contentsListe + '</ul>');
     
 });
+*/

@@ -57,13 +57,13 @@ function Neuerwerbung_Geschichte(mon, lang, ddc) {
     let xm_string;
     
     xm_string = ("0" + xm).slice(-2);
-    let SuchstringUB1Monat = SuchstringUB1 + Jahr + xm_string + "*,OR&query=any,contains,";
+    let SuchstringUB1Monat = SuchstringUB1 + Jahr + xm_string + "*,AND&query=lds56,contains," + SuchstringDDC + ",OR&query=any,contains,";
     let SuchstringUB2Monat = SuchstringUB2 + Jahr + xm_string + "*,AND&query=lds56,contains," + SuchstringDDC;
     let SuchstringZBMonat = SuchstringZB + Jahr + xm_string + "*,AND&query=lds56,contains," + SuchstringDDC + ",OR&query=any,contains,";
     let linkMonat = linkPart1 + SuchstringZBMonat + SuchstringUB1Monat + SuchstringUB2Monat + "&mode=advanced";
 
     // Liste für das Jahr
-    let SuchstringUB1Jahr = SuchstringUB1 + Jahr + "*,OR&query=any,contains,";
+    let SuchstringUB1Jahr = SuchstringUB1 + Jahr + "*,AND&query=lds56,contains," + SuchstringDDC + ",OR&query=any,contains,";
     let SuchstringUB2Jahr = SuchstringUB2 + Jahr + "*,AND&query=lds56,contains," + SuchstringDDC;
     let SuchstringZBJahr = SuchstringZB + Jahr + "*,AND&query=lds56,contains," + SuchstringDDC + ",OR&query=any,contains,";
     let linkJahr = linkPart1 + SuchstringZBJahr + SuchstringUB1Jahr + SuchstringUB2Jahr + "&mode=advanced";
@@ -110,8 +110,8 @@ $(function(){
         let ddc = String($(this).attr('class').split(" ")[2]);
         let return_arr = Neuerwerbung_Geschichte(mon, lang, ddc);
 
-        headlineMonth = "Neuerwerbung in " + return_arr[1];
-        headlineYear = "Neuerwerbung in Jahr " + return_arr[5];
+        headlineMonth = return_arr[1];
+        headlineYear = "Ganzes " + return_arr[5];
 
         let text1 = return_arr[4];
         //let text2 = return_arr[4] + ": " + return_arr[5];
@@ -129,8 +129,8 @@ $(function(){
         }
     });
     
-    contentsListeMonth = '<h2>' + headlineMonth + '</h2><ul>' + contentsListeMonth + '</ul><br>';
-    contentsListeYear = '<h2>' + headlineYear + '</h2><ul>' + contentsListeYear + '</ul>';
+    contentsListeMonth = '<storng>' + headlineMonth + '</strong><ul>' + contentsListeMonth + '</ul><br>';
+    contentsListeYear = '<strong>' + headlineYear + '</strong><ul>' + contentsListeYear + '</ul>';
     contentsAll = contentsListeMonth + contentsListeYear;
     anchor.empty().append(contentsAll);
     
