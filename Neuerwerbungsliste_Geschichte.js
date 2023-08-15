@@ -26,8 +26,7 @@ function Neuerwerbung_Geschichte(mon, lang, ddc) {
     
     //  Letzter Monat
     const mnum = Number(Monat);
-    const lm = mnum -1
-    const LetzterMonat = ("0" + lm).slice(-2);
+    //const lm = mnum -1
     
     // Monat festlegen
     if (lang === "en"){
@@ -93,7 +92,7 @@ function Neuerwerbung_Geschichte(mon, lang, ddc) {
             break;
     }
     
-    return_arr = [linkMonat, monatString, ancContents, linkJahr, Bereichsbezeichnung, Jahr];
+    return_arr = [linkMonat, monatString, ancContents, linkJahr, Bereichsbezeichnung, Jahr, xm_string, SuchstringUB1, SuchstringUB2, SuchstringZB, linkPart1];
     return return_arr;
 }
 
@@ -102,7 +101,8 @@ document.addEventListener("DOMContentLoaded", function() {
     let anchor = document.querySelector("#erwerbungsListe_Geschichte");
     let ancElments = document.querySelectorAll("#erwerbungsListe_Geschichte .link");
     let lang = document.documentElement.lang;
-  
+    
+    // Links für thematische Aufteilung
     let contentsListeMonth, contentsListeYear, contentsAll, headlineMonth, headlineYear;
     ancElments.forEach(function(el) {
       let mon = Number(el.classList[1]);
@@ -126,9 +126,27 @@ document.addEventListener("DOMContentLoaded", function() {
         contentsListeYear += '<li><a href=' + return_arr[3] + ' target="_blank" rel="noopener noreferrer">' + text1 + '</a></li>';
       }
     });
-  
-    contentsListeMonth = '<strong>' + headlineMonth + '</strong><ul>' + contentsListeMonth + '</ul><br>';
-    contentsListeYear = '<strong>' + headlineYear + '</strong><ul>' + contentsListeYear + '</ul>';
+    
+    // Links für Bibliothek
+    let contentsBibMonth, contentsBibYear;
+    const bibliotheken = ['UB Geschichte', 'Sozial- und Wirtschaftsgeschichte', 'Zentralbibliothek']
+    for (let i = 0; i < bibliotheken.length; i++) {
+        let linkMonth, linkYear;
+        if (i < 2) {
+            linkMonth = return_arr[10] + return_arr[i + 7] + return_arr[5] + return_arr[6] + '*&mode=advanced';
+            linkYear = return_arr[10] + return_arr[i + 7] + return_arr[5] + '*&mode=advanced';
+        } else {
+            linkMonth = return_arr[10] + return_arr[i + 7] + return_arr[5] + return_arr[6] + '*,AND&query=lds56,contains,9?0&mode=advanced';
+            linkYear = return_arr[10] + return_arr[i + 7] + return_arr[5] + '*,AND&query=lds56,contains,9?0&mode=advanced';
+        }
+        
+        contentsBibMonth += '<li><a href=' + linkMonth + ' target="_blank" rel="noopener noreferrer">' + bibliotheken[i] + '</li>';
+        contentsBibYear += '<li><a href=' + linkYear + ' target="_blank" rel="noopener noreferrer">' + bibliotheken[i] + '</li>';
+      }
+    
+
+    contentsListeMonth = '<h1>' + headlineMonth + '</h1><strong>Nach Bibliothek</strong><ul>' + contentsBibMonth + '</ul><strong>Nach Thema</strong><ul>' + contentsListeMonth + '</ul><br>';
+    contentsListeYear = '<h1>' + headlineYear + '</h1>strong>Nach Bibliothek</strong><ul>'+ contentsBibYear +'</ul><strong>Nach Thema</strong><ul>' + contentsListeYear + '</ul>';
     contentsAll = contentsListeMonth + contentsListeYear;
     anchor.innerHTML = contentsAll;
   });
