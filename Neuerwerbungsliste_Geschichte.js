@@ -137,7 +137,7 @@ document.addEventListener("DOMContentLoaded", function() {
             linkMonth = return_arr[10] + return_arr[i + 7] + return_arr[5] + return_arr[6] + '*&mode=advanced';
             linkYear = return_arr[10] + return_arr[i + 7] + return_arr[5] + '*&mode=advanced';
         } else {
-            linkMonth = return_arr[10] + return_arr[i + 7] + return_arr[5] + return_arr[6] + '*,AND&query=lds56,contains,9?0&mode=advanced';
+            linkMonth = return_arr[10] + return_arr[i + 7] + return_arr[5] + return_arr[6] + '*,AND&query=lds56,contains,9?0*,NOT&query=lds56,contains,910&mode=advanced';
             linkYear = return_arr[10] + return_arr[i + 7] + return_arr[5] + '*,AND&query=lds56,contains,9?0&mode=advanced';
         }
         
