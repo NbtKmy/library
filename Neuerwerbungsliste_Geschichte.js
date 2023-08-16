@@ -58,17 +58,15 @@ function Neuerwerbung_Geschichte(mon, lang, ddc) {
     
     xm_string = ("0" + xm).slice(-2);
     let SuchstringUB1Monat = SuchstringUB1 + Jahr + xm_string + "*,AND&query=lds56,contains," + SuchstringDDC + ",OR&query=any,contains,";
-    let SuchstringUB2Monat = SuchstringUB2 + Jahr + xm_string + "*,AND&query=lds56,contains," + SuchstringDDC + ",OR&query=any,contains,";
-    let SuchstringUB3Monat = SuchstringUB3 + Jahr + xm_string + "*,AND&query=lds56,contains," + SuchstringDDC;
+    let SuchstringUB2Monat = SuchstringUB2 + Jahr + xm_string + "*,AND&query=lds56,contains," + SuchstringDDC;
     let SuchstringZBMonat = SuchstringZB + Jahr + xm_string + "*,AND&query=lds56,contains," + SuchstringDDC + ",OR&query=any,contains,";
-    let linkMonat = linkPart1 + SuchstringZBMonat + SuchstringUB1Monat + SuchstringUB2Monat + SuchstringUB3Monat + "&mode=advanced";
+    let linkMonat = linkPart1 + SuchstringZBMonat + SuchstringUB1Monat + SuchstringUB2Monat + "&mode=advanced";
 
     // Liste für das Jahr
     let SuchstringUB1Jahr = SuchstringUB1 + Jahr + "*,AND&query=lds56,contains," + SuchstringDDC + ",OR&query=any,contains,";
-    let SuchstringUB2Jahr = SuchstringUB2 + Jahr + "*,AND&query=lds56,contains," + SuchstringDDC + ",OR&query=any,contains,";
-    let SuchstringUB3Jahr = SuchstringUB3 + Jahr + "*,AND&query=lds56,contains," + SuchstringDDC;
+    let SuchstringUB2Jahr = SuchstringUB2 + Jahr + "*,AND&query=lds56,contains," + SuchstringDDC;
     let SuchstringZBJahr = SuchstringZB + Jahr + "*,AND&query=lds56,contains," + SuchstringDDC + ",OR&query=any,contains,";
-    let linkJahr = linkPart1 + SuchstringZBJahr + SuchstringUB1Jahr + SuchstringUB2Jahr + SuchstringUB3Jahr + "&mode=advanced";
+    let linkJahr = linkPart1 + SuchstringZBJahr + SuchstringUB1Jahr + SuchstringUB2Jahr + "&mode=advanced";
 
     let Bereichsbezeichnung;
     switch(ddc){
@@ -143,8 +141,8 @@ document.addEventListener("DOMContentLoaded", function() {
             linkMonth = return_arr[11] + return_arr[i + 7] + return_arr[5] + return_arr[6] + '*&mode=advanced';
             linkYear = return_arr[11] + return_arr[i + 7] + return_arr[5] + '*&mode=advanced';
         } else {
-            linkMonth = return_arr[11] + return_arr[i + 7] + return_arr[5] + return_arr[6] + '*,AND&query=lds56,contains,9??*,NOT&query=lds56,contains,91?*&mode=advanced';
-            linkYear = return_arr[11] + return_arr[i + 7] + return_arr[5] + '*,AND&query=lds56,contains,9?0&mode=advanced';
+            linkMonth = return_arr[11] + return_arr[i + 7] + return_arr[5] + return_arr[6] + '*,AND&query=lds56,contains,9*,NOT&query=lds56,contains,91*&mode=advanced';
+            linkYear = return_arr[11] + return_arr[i + 7] + return_arr[5] + '*,AND&query=lds56,contains,9*,NOT&query=lds56,contains,91*&mode=advanced';
         }
         
         contentsBibMonth += '<li><a href=' + linkMonth + ' target="_blank" rel="noopener noreferrer">' + bibliotheken[i] + '</a></li>';
