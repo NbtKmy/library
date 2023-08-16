@@ -6,6 +6,7 @@ function Neuerwerbung_Geschichte(mon, lang, ddc) {
     // Prefix von Suchstring für den UB-Bestand. Das Prefix für die UB ist obligatorisch
     var SuchstringUB1 = "UHS-";
     var SuchstringUB2 = "UFSW-";
+    var SuchstringUB3 = "OEGMON-";
     // Prefix für den ZB-Bestand ist faklutativ
     // Wenn ZB-Bestand aufgelistet werden soll
     var SuchstringZB = "Z01SE";
@@ -31,13 +32,13 @@ function Neuerwerbung_Geschichte(mon, lang, ddc) {
     // Monat festlegen
     if (lang === "en"){
         var monate = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-        var fach = ["History", "History of the ancient world", "History of Europe", "History of Asia", "History of Africa", "History of North America", "History of South America"];
+        var fach = ["History", "History of the ancient world", "History of Switzerland", "History of Europe", "History of Asia", "History of Africa", "History of North America", "History of South America"];
         var linkPart1 = "https://uzb.swisscovery.slsp.ch/discovery/search?tab=41SLSP_UZB_DN_and_CI&search_scope=DN_and_CI&vid=41SLSP_UZB:UZB&lang=en&offset=0&query=any,contains,";
         var ancContents = '<li><a href="https://www.ub.uzh.ch/en/contact/anschaffungsvorschlag.html" target="_blank" rel="noopener noreferrer">Acquisition proposal</a></li>';
         
     } else {
         var monate = ["Januar", "Februar", "März", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Dezember"];
-        var fach = ["Geschichtswissenschaft", "Alte Geschichte", "Geschichte Europas", "Geschichte Asiens", "Geschichte Afrikas", "Geschichte Nordamerikas", "Geschichte Südamerikas"];
+        var fach = ["Geschichtswissenschaft", "Alte Geschichte", "Geschichte der Schweiz", "Geschichte Europas", "Geschichte Asiens", "Geschichte Afrikas", "Geschichte Nordamerikas", "Geschichte Südamerikas"];
         var linkPart1 = "https://uzb.swisscovery.slsp.ch/discovery/search?tab=41SLSP_UZB_DN_and_CI&search_scope=DN_and_CI&vid=41SLSP_UZB:UZB&offset=0&query=any,contains,";
         var ancContents = '<li><a href="https://www.ub.uzh.ch/de/contact/anschaffungsvorschlag.html" target="_blank" rel="noopener noreferrer">Acquisition proposal</a></li>';
         
@@ -57,15 +58,17 @@ function Neuerwerbung_Geschichte(mon, lang, ddc) {
     
     xm_string = ("0" + xm).slice(-2);
     let SuchstringUB1Monat = SuchstringUB1 + Jahr + xm_string + "*,AND&query=lds56,contains," + SuchstringDDC + ",OR&query=any,contains,";
-    let SuchstringUB2Monat = SuchstringUB2 + Jahr + xm_string + "*,AND&query=lds56,contains," + SuchstringDDC;
+    let SuchstringUB2Monat = SuchstringUB2 + Jahr + xm_string + "*,AND&query=lds56,contains," + SuchstringDDC + ",OR&query=any,contains,";
+    let SuchstringUB3Monat = SuchstringUB3 + Jahr + xm_string + "*,AND&query=lds56,contains," + SuchstringDDC;
     let SuchstringZBMonat = SuchstringZB + Jahr + xm_string + "*,AND&query=lds56,contains," + SuchstringDDC + ",OR&query=any,contains,";
-    let linkMonat = linkPart1 + SuchstringZBMonat + SuchstringUB1Monat + SuchstringUB2Monat + "&mode=advanced";
+    let linkMonat = linkPart1 + SuchstringZBMonat + SuchstringUB1Monat + SuchstringUB2Monat + SuchstringUB3Monat + "&mode=advanced";
 
     // Liste für das Jahr
     let SuchstringUB1Jahr = SuchstringUB1 + Jahr + "*,AND&query=lds56,contains," + SuchstringDDC + ",OR&query=any,contains,";
-    let SuchstringUB2Jahr = SuchstringUB2 + Jahr + "*,AND&query=lds56,contains," + SuchstringDDC;
+    let SuchstringUB2Jahr = SuchstringUB2 + Jahr + "*,AND&query=lds56,contains," + SuchstringDDC + ",OR&query=any,contains,";
+    let SuchstringUB3Jahr = SuchstringUB3 + Jahr + "*,AND&query=lds56,contains," + SuchstringDDC;
     let SuchstringZBJahr = SuchstringZB + Jahr + "*,AND&query=lds56,contains," + SuchstringDDC + ",OR&query=any,contains,";
-    let linkJahr = linkPart1 + SuchstringZBJahr + SuchstringUB1Jahr + SuchstringUB2Jahr + "&mode=advanced";
+    let linkJahr = linkPart1 + SuchstringZBJahr + SuchstringUB1Jahr + SuchstringUB2Jahr + SuchstringUB3Jahr + "&mode=advanced";
 
     let Bereichsbezeichnung;
     switch(ddc){
@@ -75,24 +78,27 @@ function Neuerwerbung_Geschichte(mon, lang, ddc) {
         case "930":
             Bereichsbezeichnung = fach[1];
             break;
-        case "940":
+        case "949.4":
             Bereichsbezeichnung = fach[2];
             break;
-        case "950":
+        case "940":
             Bereichsbezeichnung = fach[3];
             break;
-        case "960":
+        case "950":
             Bereichsbezeichnung = fach[4];
             break;
-        case "970":
+        case "960":
             Bereichsbezeichnung = fach[5];
             break;
-        case "980":
+        case "970":
             Bereichsbezeichnung = fach[6];
+            break;
+        case "980":
+            Bereichsbezeichnung = fach[7];
             break;
     }
     
-    return_arr = [linkMonat, monatString, ancContents, linkJahr, Bereichsbezeichnung, Jahr, xm_string, SuchstringUB1, SuchstringUB2, SuchstringZB, linkPart1];
+    return_arr = [linkMonat, monatString, ancContents, linkJahr, Bereichsbezeichnung, Jahr, xm_string, SuchstringUB1, SuchstringUB3, SuchstringUB2, SuchstringZB, linkPart1];
     return return_arr;
 }
 
@@ -130,15 +136,15 @@ document.addEventListener("DOMContentLoaded", function() {
     // Links für Bibliothek
     let contentsBibMonth = '';
     let contentsBibYear = '';
-    const bibliotheken = ['UB Geschichte', 'Sozial- und Wirtschaftsgeschichte', 'Zentralbibliothek']
+    const bibliotheken = ['UB Geschichte', 'UB Osteuropäische Geschichte', 'Sozial- und Wirtschaftsgeschichte', 'Zentralbibliothek']
     for (let i = 0; i < bibliotheken.length; i++) {
         let linkMonth, linkYear;
-        if (i < 2) {
-            linkMonth = return_arr[10] + return_arr[i + 7] + return_arr[5] + return_arr[6] + '*&mode=advanced';
-            linkYear = return_arr[10] + return_arr[i + 7] + return_arr[5] + '*&mode=advanced';
+        if (i < 3) {
+            linkMonth = return_arr[11] + return_arr[i + 7] + return_arr[5] + return_arr[6] + '*&mode=advanced';
+            linkYear = return_arr[11] + return_arr[i + 7] + return_arr[5] + '*&mode=advanced';
         } else {
-            linkMonth = return_arr[10] + return_arr[i + 7] + return_arr[5] + return_arr[6] + '*,AND&query=lds56,contains,9?0*,NOT&query=lds56,contains,910&mode=advanced';
-            linkYear = return_arr[10] + return_arr[i + 7] + return_arr[5] + '*,AND&query=lds56,contains,9?0&mode=advanced';
+            linkMonth = return_arr[11] + return_arr[i + 7] + return_arr[5] + return_arr[6] + '*,AND&query=lds56,contains,9?0*,NOT&query=lds56,contains,910&mode=advanced';
+            linkYear = return_arr[11] + return_arr[i + 7] + return_arr[5] + '*,AND&query=lds56,contains,9?0&mode=advanced';
         }
         
         contentsBibMonth += '<li><a href=' + linkMonth + ' target="_blank" rel="noopener noreferrer">' + bibliotheken[i] + '</a></li>';
