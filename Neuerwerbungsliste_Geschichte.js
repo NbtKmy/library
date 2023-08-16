@@ -150,8 +150,8 @@ document.addEventListener("DOMContentLoaded", function() {
       }
     
 
-    contentsListeMonth = '<h1>' + headlineMonth + '</h1><strong>Nach Bibliothek</strong><ul>' + contentsBibMonth + '</ul><strong>Nach Thema</strong><ul>' + contentsListeMonth + '</ul><br>';
-    contentsListeYear = '<h1>' + headlineYear + '</h1><strong>Nach Bibliothek</strong><ul>'+ contentsBibYear +'</ul><strong>Nach Thema</strong><ul>' + contentsListeYear + '</ul>';
+    contentsListeMonth = '<h3>' + headlineMonth + '</h3><strong>Nach Bibliothek</strong><ul>' + contentsBibMonth + '</ul><strong>Nach Thema</strong><ul>' + contentsListeMonth + '</ul><br>';
+    contentsListeYear = '<h3>' + headlineYear + '</h3><strong>Nach Bibliothek</strong><ul>'+ contentsBibYear +'</ul><strong>Nach Thema</strong><ul>' + contentsListeYear + '</ul>';
     contentsAll = contentsListeMonth + contentsListeYear;
     anchor.innerHTML = contentsAll;
   });
