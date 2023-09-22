@@ -1,6 +1,10 @@
+# Get name
+$name = whoami
+$name_arr = $name.Split("\")
+$name_part = $name_arr[1]
 #Parameters
-$SourceFolder = "C:\Users\nkamiy\Desktop\csv"
-$Output = "C:\Users\nkamiy\Desktop\csv\concatlated.csv"
+$SourceFolder = "C:\Users\${name_part}\[name]\[of]\[your]\[folder]"
+$Output = $SourceFolder + "\concatlated.csv"
 
 # Get a list of the CSV files in a directory
 $CSVFiles = Get-ChildItem -Path $SourceFolder  -Filter "*.csv" 
