@@ -1,5 +1,3 @@
-#!/bin/bash
-
 #Parameters
 $SourceFolder = "C:\Users\nkamiy\Desktop\csv"
 $Output = "C:\Users\nkamiy\Desktop\csv\concatlated.csv"
