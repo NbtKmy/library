@@ -120,12 +120,12 @@ document.addEventListener("DOMContentLoaded", function() {
    
     if (lang == 'en') {
         bibliotheken = ['UB Medicine', 'Zentralbibliothek'];
-        zb_month = '<li><a href=' + zb_link_month + ' target="_blank" rel="noopener noreferrer">Medicin, Health</a></li>';
-        zb_year += '<li><a href=' + zb_link_year + ' target="_blank" rel="noopener noreferrer">Medicin, Health</a></li>';
+        zb_month = '<li><a href=' + zb_link_month + ' target="_blank" rel="noopener noreferrer">Medicine, Health</a></li>';
+        zb_year = '<li><a href=' + zb_link_year + ' target="_blank" rel="noopener noreferrer">Medicine, Health</a></li>';
     } else {
         bibliotheken = ['UB Medizin', 'Zentralbibliothek'];
-        zb_month = '<li><a href=' + zb_link_month + ' target="_blank" rel="noopener noreferrer">Medicin, Health</a></li>';
-        zb_year += '<li><a href=' + zb_link_year + ' target="_blank" rel="noopener noreferrer">Medicin, Health</a></li>';
+        zb_month = '<li><a href=' + zb_link_month + ' target="_blank" rel="noopener noreferrer">Medizin, Gesundheit</a></li>';
+        zb_year = '<li><a href=' + zb_link_year + ' target="_blank" rel="noopener noreferrer">Medizin, Gesundheit</a></li>';
     }
     
     contentsListeMonth = '<h3>' + headlineMonth + '</h3><strong>' + bibliotheken[0] + '</strong><ul>' + contentsListeMonth + '</ul><br><strong>' + bibliotheken[1] + '</strong><ul>' + zb_month + '</ul>';
