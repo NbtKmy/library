@@ -6,8 +6,6 @@ function Neuerwerbung_Medizin(mon, lang, shortname) {
     // Prefix von Suchstring für den UB-Bestand. Das Prefix für die UB ist obligatorisch
     var SuchstringUB1 = "UMBC-" + shortname + "-";
     
-    var SuchstringZB = "Z01SE-610";
-    
     
     // Datum heute
     const d = new Date(Date.now());
@@ -54,12 +52,11 @@ function Neuerwerbung_Medizin(mon, lang, shortname) {
     let xm_string;
     
     xm_string = ("0" + xm).slice(-2);
-    let SuchstringUB1Monat = SuchstringUB1 + Jahr + xm_string + "*,";
+    let SuchstringUB1Monat = SuchstringUB1 + Jahr + xm_string + ",";
     let linkMonat = linkPart1 + SuchstringUB1Monat + "&mode=advanced";
 
     // Liste für das Jahr
-    let SuchstringUB1Jahr = SuchstringUB1 + Jahr + "*,";
-    let linkJahr = linkPart1 +SuchstringUB1 + Jahr + "&mode=advanced";
+    let linkJahr = linkPart1 +SuchstringUB1 + Jahr + "*," + "&mode=advanced";
 
     let Bereichsbezeichnung;
     switch(shortname){
