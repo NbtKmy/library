@@ -85,14 +85,14 @@ document.addEventListener("DOMContentLoaded", function() {
     let lang = document.documentElement.lang;
     
     // Links für thematische Aufteilung
-    let contentsListeMonth, contentsListeYear, contentsAll, headlineMonth, headlineYear;
+    let contentsListeMonth, contentsListeYear, contentsAll, headlineMonth;
     ancElments.forEach(function(el) {
       let mon = Number(el.classList[1]);
       let shortname = el.classList[2];
       let return_arr = Neuerwerbung_Medizin(mon, lang, shortname);
   
       headlineMonth = return_arr[1];
-      headlineYear = "Ganzes " + return_arr[5];
+      
   
       let text1 = return_arr[4];
   
@@ -111,15 +111,17 @@ document.addEventListener("DOMContentLoaded", function() {
     
     
     
-    let bibliotheken, zb_month, zb_year;
+    let bibliotheken, zb_month, zb_year, headlineYear;
     let zb_link_month = return_arr[8] + 'Z01SE' + return_arr[5] + return_arr[6] + '*,AND&query=lds56,contains,610&mode=advanced';
     let zb_link_year = return_arr[8] + 'Z01SE' + return_arr[5] + '*,AND&query=lds56,contains,610&mode=advanced';
    
     if (lang == 'en') {
+        headlineYear = return_arr[5];
         bibliotheken = ['UB Medicine', 'Zentralbibliothek'];
         zb_month = '<li><a href=' + zb_link_month + ' target="_blank" rel="noopener noreferrer">Medicine, Health</a></li>';
         zb_year = '<li><a href=' + zb_link_year + ' target="_blank" rel="noopener noreferrer">Medicine, Health</a></li>';
     } else {
+        headlineYear = "Ganzes " + return_arr[5];
         bibliotheken = ['UB Medizin', 'Zentralbibliothek'];
         zb_month = '<li><a href=' + zb_link_month + ' target="_blank" rel="noopener noreferrer">Medizin, Gesundheit</a></li>';
         zb_year = '<li><a href=' + zb_link_year + ' target="_blank" rel="noopener noreferrer">Medizin, Gesundheit</a></li>';
