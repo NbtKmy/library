@@ -1,9 +1,6 @@
 <!-- hier nur html-elemente und js-code -->
+<!-- teaser-Name "neuerscheinungen" (DE) oder "neuerscheinungen_en" (EN) -->
 
-<!-- test für Medizin -->
-<!-- teaser-Name "neuerscheinungen"-->
-
-<h2>Medizin</h2>
 <div id="erwerbungsListe_Medizin">
     <div class="link 1 Med"></div>
     <div class="link 1 GB"></div>
@@ -12,12 +9,9 @@
 </div>
 
 <script>
-    // mon = 1 bedeutet letzter Monat, mon = 2 bedeutet vorvorletzter Monat usw.
-// lang = ISO 639-1 Code entweder de oder en...
+ 
 function Neuerwerbung_Medizin(mon, lang, shortname) {
     
-    // Sucheinstellung 
-    // Prefix von Suchstring für den UB-Bestand. Das Prefix für die UB ist obligatorisch
     let SuchstringUB1 = "UMBC-" + shortname + "-";
 
     
