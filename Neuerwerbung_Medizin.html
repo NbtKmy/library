@@ -1,0 +1,152 @@
+<!-- hier nur html-elemente und js-code -->
+
+<!-- test für Medizin -->
+<!-- teaser-Name "neuerscheinungen"-->
+
+<h2>Medizin</h2>
+<div id="erwerbungsListe_Medizin">
+    <div class="link 1 Med"></div>
+    <div class="link 1 GB"></div>
+    <div class="link 1 MedG"></div>
+    <div class="link 1 ZMed"></div>
+</div>
+
+<script>
+    // mon = 1 bedeutet letzter Monat, mon = 2 bedeutet vorvorletzter Monat usw.
+// lang = ISO 639-1 Code entweder de oder en...
+function Neuerwerbung_Medizin(mon, lang, shortname) {
+    
+    // Sucheinstellung 
+    // Prefix von Suchstring für den UB-Bestand. Das Prefix für die UB ist obligatorisch
+    let SuchstringUB1 = "UMBC-" + shortname + "-";
+
+    
+    
+    // Datum heute
+    const d = new Date(Date.now());
+    const Datum = d.toISOString();
+    // ISO-String z.B. "2022-02-18T13:38:17.783Z"
+    let Jahr = Datum.slice(0,4);
+    //console.log(Jahr);
+    const Monat = Datum.slice(5,7);
+    
+    // Letztes Jahr
+    const ynum = Number(Jahr); 
+    const lynum = ynum - 1;
+    const LetztesJahr = String(lynum);
+    
+    //  Letzter Monat
+    const mnum = Number(Monat);
+    //const lm = mnum -1
+    
+    // Monat festlegen
+    if (lang === "en"){
+        var monate = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+        var fach = ["Medicine", "Health Professions", "History of Medicine", "Dentistry"];
+        var linkPart1 = "https://uzb.swisscovery.slsp.ch/discovery/search?tab=41SLSP_UZB_DN_and_CI&search_scope=DN_and_CI&vid=41SLSP_UZB:UZB&lang=en&offset=0&query=any,contains,";
+        var ancContents = '<li><a href="https://www.ub.uzh.ch/en/contact/anschaffungsvorschlag.html" target="_blank" rel="noopener noreferrer">Acquisition proposal</a></li>';
+        
+    } else {
+        var monate = ["Januar", "Februar", "März", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Dezember"];
+        var fach = ["Medizin", "Gesundheitsberufe", "Medizingeschichte", "Zahnmedizin"];
+        var linkPart1 = "https://uzb.swisscovery.slsp.ch/discovery/search?tab=41SLSP_UZB_DN_and_CI&search_scope=DN_and_CI&vid=41SLSP_UZB:UZB&offset=0&query=any,contains,";
+        var ancContents = '<li><a href="https://www.ub.uzh.ch/de/contact/anschaffungsvorschlag.html" target="_blank" rel="noopener noreferrer">Acquisition proposal</a></li>';
+        
+    }
+    
+    
+    let xm = mnum - mon;
+    
+    if (xm < 1){
+        xm = 12 + xm;
+        Jahr = LetztesJahr;
+    }
+    let ym = xm - 1; 
+    let monatString = monate[ym];
+
+    let xm_string;
+    
+    xm_string = ("0" + xm).slice(-2);
+    let SuchstringUB1Monat = SuchstringUB1 + Jahr + xm_string + "*,";
+    let linkMonat = linkPart1 + SuchstringUB1Monat + "&mode=advanced";
+
+    // Liste für das Jahr
+    let SuchstringUB1Jahr = SuchstringUB1 + Jahr + "*,";
+    let linkJahr = linkPart1 +SuchstringUB1 + Jahr + "&mode=advanced";
+
+    let Bereichsbezeichnung;
+    switch(shortname){
+        case "Med":
+            Bereichsbezeichnung = fach[0];
+            break;
+        case "GB":
+            Bereichsbezeichnung = fach[1];
+            break;
+        case "MedG":
+            Bereichsbezeichnung = fach[2];
+            break;
+        case "ZMed":
+            Bereichsbezeichnung = fach[3];
+            break;
+    }
+    
+    return_arr = [linkMonat, monatString, ancContents, linkJahr, Bereichsbezeichnung, Jahr, xm_string, SuchstringUB1, linkPart1];
+    return return_arr;
+}
+
+// Linkliste erstellen und DOM in HTML hineinschieben
+document.addEventListener("DOMContentLoaded", function() {
+    let anchor = document.querySelector("#erwerbungsListe_Medizin");
+    let ancElments = document.querySelectorAll("#erwerbungsListe_Medizin .link");
+    let lang = document.documentElement.lang;
+    
+    // Links für thematische Aufteilung
+    let contentsListeMonth, contentsListeYear, contentsAll, headlineMonth, headlineYear;
+    ancElments.forEach(function(el) {
+      let mon = Number(el.classList[1]);
+      let shortname = el.classList[2];
+      let return_arr = Neuerwerbung_Medizin(mon, lang, shortname);
+  
+      headlineMonth = return_arr[1];
+      
+  
+      let text1 = return_arr[4];
+  
+      if (contentsListeMonth === undefined) {
+        contentsListeMonth = '<li><a href=' + return_arr[0] + ' target="_blank" rel="noopener noreferrer">' + text1 + '</a></li>';
+      } else {
+        contentsListeMonth += '<li><a href=' + return_arr[0] + ' target="_blank" rel="noopener noreferrer">' + text1 + '</a></li>';
+      }
+  
+      if (contentsListeYear === undefined) {
+        contentsListeYear = '<li><a href=' + return_arr[3] + ' target="_blank" rel="noopener noreferrer">' + text1 + '</a></li>';
+      } else {
+        contentsListeYear += '<li><a href=' + return_arr[3] + ' target="_blank" rel="noopener noreferrer">' + text1 + '</a></li>';
+      }
+    });
+    
+    
+    
+    let bibliotheken, zb_month, zb_year;
+    let zb_link_month = return_arr[8] + 'Z01SE' + return_arr[5] + return_arr[6] + '*,AND&query=lds56,contains,610&mode=advanced';
+    let zb_link_year = return_arr[8] + 'Z01SE' + return_arr[5] + '*,AND&query=lds56,contains,610&mode=advanced';
+   
+    if (lang == 'en') {
+        bibliotheken = ['UB Medicine', 'Zentralbibliothek'];
+        zb_month = '<li><a href=' + zb_link_month + ' target="_blank" rel="noopener noreferrer">Medicine, Health</a></li>';
+        zb_year = '<li><a href=' + zb_link_year + ' target="_blank" rel="noopener noreferrer">Medicine, Health</a></li>';
+        headlineYear = return_arr[5];
+    } else {
+        bibliotheken = ['UB Medizin', 'Zentralbibliothek'];
+        zb_month = '<li><a href=' + zb_link_month + ' target="_blank" rel="noopener noreferrer">Medizin, Gesundheit</a></li>';
+        zb_year = '<li><a href=' + zb_link_year + ' target="_blank" rel="noopener noreferrer">Medizin, Gesundheit</a></li>';
+        headlineYear = "Ganzes " + return_arr[5];
+    }
+    
+    contentsListeMonth = '<h3>' + headlineMonth + '</h3><strong>' + bibliotheken[0] + '</strong><ul>' + contentsListeMonth + '</ul><br><strong>' + bibliotheken[1] + '</strong><ul>' + zb_month + '</ul>';
+    contentsListeYear = '<h3>' + headlineYear + '</h3><strong>' + bibliotheken[0] + '</strong><ul>' + contentsListeYear + '</ul><br><strong>' + bibliotheken[1] + '</strong><ul>' + zb_year + '</ul>';
+    contentsAll = contentsListeMonth + contentsListeYear;
+    anchor.innerHTML = contentsAll;
+  });
+  
+</script>
