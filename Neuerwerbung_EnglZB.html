@@ -1,0 +1,141 @@
+<!-- hier nur html-elemente und js-code -->
+<!-- teaser-Name "neuerscheinungen" (DE) oder "neuerscheinungen_en" (EN) -->
+
+<div id="erwerbungsListe_EnglZB">
+    <div class="link 1"></div> 
+</div>
+
+<script>
+ 
+function Neuerwerbung_Engl(mon, lang) {
+    
+    let SuchstringZB = "Z01SE";
+    let SuchstringLing = ",AND&query=lds56,contains,420";
+    let SuchstringEngLitSek = ",AND&query=lds56,contains,820,NOT&query=lds56,contains,B";
+    let SuchstringEngLitPri = ",AND&query=lds56,contains,820,AND&query=lds56,contains,B";
+    let SuchstringAmiLitSek = ",AND&query=lds56,contains,810,NOT&query=lds56,contains,B";
+    let SuchstringAmiLitPri = ",AND&query=lds56,contains,810,AND&query=lds56,contains,B";
+    let SuchstringSekLit = ",AND&query=lds56,contains,810%20OR%20820,NOT&query=lds56,contains,B";
+    let SuchstringPriLit = ",AND&query=lds56,contains,810%20OR%20820,AND&query=lds56,contains,B";
+    
+    // Datum heute
+    const d = new Date(Date.now());
+    const Datum = d.toISOString();
+    // ISO-String z.B. "2022-02-18T13:38:17.783Z"
+    let Jahr = Datum.slice(0,4);
+    //console.log(Jahr);
+    const Monat = Datum.slice(5,7);
+    
+    // Letztes Jahr
+    const ynum = Number(Jahr); 
+    const lynum = ynum - 1;
+    const LetztesJahr = String(lynum);
+    
+    //  Letzter Monat
+    const mnum = Number(Monat);
+    //const lm = mnum -1
+    
+    let monate, fach, linkPrefix, linkSuffix, JahrString;
+    // Monat festlegen
+    if (lang === "en"){
+        monate = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+        fach = ["Linguistics", "English Literature Secondary", "English Literature Primary", "American Literature Secondary", "American Literature Primary", "Literature Secondary", "Literature Primary"];
+        linkPrefix = "https://uzb.swisscovery.slsp.ch/discovery/search?query=any,contains,";
+        linSuffix =",AND&tab=LibraryCatalog&search_scope=MyInstitution&vid=41SLSP_UZB:UZB&lang=en&mode=advanced&offset=0";
+        Jahrstring = "Year";
+        
+    } else {
+        monate = ["Januar", "Februar", "März", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Dezember"];
+        fach = ["Linguistik", "Englische Literatur Sekundär", "Englische Literatur Primär", "Amerikanische Literatur Sekundär", "Amerikanische Literatur Primär", "Literatur Sekundär", "Literatur Primär"];
+        linkPrefix = "https://uzb.swisscovery.slsp.ch/discovery/search?query=any,contains,";
+        linkSuffix = ",AND&tab=LibraryCatalog&search_scope=MyInstitution&vid=41SLSP_UZB:UZB&mode=advanced&offset=0";
+        Jahrstring = "Jahr";
+    }
+    
+    
+    let xm = mnum - mon;
+    
+    if (xm < 1){
+        xm = 12 + xm;
+        Jahr = LetztesJahr;
+    }
+    let ym = xm - 1; 
+    let monatString = monate[ym];
+    JahrString += " " + String(Jahr); 
+
+    let xm_string;
+    xm_string = ("0" + xm).slice(-2);
+    let SuchstringZBMonat = linkPrefix + SuchstringZB + Jahr + xm_string + "*";
+    let linkMonatLing = SuchstringZBMonat + SuchstringLing + linkSuffix;
+    let linkMonatEngLitSek = SuchstringZBMonat + SuchstringEngLitSek + linkSuffix;
+    let linkMonatEngLitPri = SuchstringZBMonat + SuchstringEngLitPri + linkSuffix;
+    let linkMonatAmiSek = SuchstringZBMonat + SuchstringAmiLitSek + linkSuffix;
+    let linkMonatAmiPri = SuchstringZBMonat + SuchstringAmiLitPri + linkSuffix;
+
+    // Liste für das Jahr
+    let SuchstringZBJahr = linkPrefix + SuchstringZB + Jahr + "*";
+    let linkJahrLing = SuchstringZBJahr + SuchstringLing + linkSuffix;
+    let linkJahrSekLit = SuchstringZBJahr + SuchstringSekLit + linkSuffix;
+    let linkJahrPriLit = SuchstringZBJahr + SuchstringPriLit + linkSuffix;
+
+    
+    
+    return_arr = [JahrString, monatString, fach, linkMonatLing, linkMonatEngLitSek, linkMonatEngLitPri, linkMonatAmiSek, linkMonatAmiPri, linkJahrLing, linkJahrSekLit, linkJahrPriLit];
+    return return_arr;
+}
+
+// Linkliste erstellen und DOM in HTML hineinschieben
+document.addEventListener("DOMContentLoaded", function() {
+    let anchor = document.querySelector("#erwerbungsListe_EnglZB");
+    let ancElments = document.querySelectorAll("#erwerbungsListe_EnglZB .link");
+    let lang = document.documentElement.lang;
+    
+    // Links für thematische Aufteilung
+    let contentsListeMonth, contentsListeYear, contentsAll, headlineMonth, headlineYear;
+    ancElments.forEach(function(el) {
+      let mon = Number(el.classList[1]);
+      let return_arr = Neuerwerbung_Medizin(mon, lang);
+  
+      headlineMonth = return_arr[1];
+      
+  
+      let text1 = return_arr[4];
+  
+      if (contentsListeMonth === undefined) {
+        contentsListeMonth = '<li><a href=' + return_arr[0] + ' target="_blank" rel="noopener noreferrer">' + text1 + '</a></li>';
+      } else {
+        contentsListeMonth += '<li><a href=' + return_arr[0] + ' target="_blank" rel="noopener noreferrer">' + text1 + '</a></li>';
+      }
+  
+      if (contentsListeYear === undefined) {
+        contentsListeYear = '<li><a href=' + return_arr[3] + ' target="_blank" rel="noopener noreferrer">' + text1 + '</a></li>';
+      } else {
+        contentsListeYear += '<li><a href=' + return_arr[3] + ' target="_blank" rel="noopener noreferrer">' + text1 + '</a></li>';
+      }
+    });
+    
+    
+    
+    let bibliotheken, zb_month, zb_year;
+    let zb_link_month = return_arr[8] + 'Z01SE' + return_arr[5] + return_arr[6] + '*,AND&query=lds56,contains,610&mode=advanced';
+    let zb_link_year = return_arr[8] + 'Z01SE' + return_arr[5] + '*,AND&query=lds56,contains,610&mode=advanced';
+   
+    if (lang == 'en') {
+        bibliotheken = ['UB Medicine', 'Zentralbibliothek'];
+        zb_month = '<li><a href=' + zb_link_month + ' target="_blank" rel="noopener noreferrer">Medicine, Health</a></li>';
+        zb_year = '<li><a href=' + zb_link_year + ' target="_blank" rel="noopener noreferrer">Medicine, Health</a></li>';
+        headlineYear = return_arr[5];
+    } else {
+        bibliotheken = ['UB Medizin', 'Zentralbibliothek'];
+        zb_month = '<li><a href=' + zb_link_month + ' target="_blank" rel="noopener noreferrer">Medizin, Gesundheit</a></li>';
+        zb_year = '<li><a href=' + zb_link_year + ' target="_blank" rel="noopener noreferrer">Medizin, Gesundheit</a></li>';
+        headlineYear = "Ganzes " + return_arr[5];
+    }
+    
+    contentsListeMonth = '<h3>' + headlineMonth + '</h3><strong>' + bibliotheken[0] + '</strong><ul>' + contentsListeMonth + '</ul><br><strong>' + bibliotheken[1] + '</strong><ul>' + zb_month + '</ul>';
+    contentsListeYear = '<h3>' + headlineYear + '</h3><strong>' + bibliotheken[0] + '</strong><ul>' + contentsListeYear + '</ul><br><strong>' + bibliotheken[1] + '</strong><ul>' + zb_year + '</ul>';
+    contentsAll = contentsListeMonth + contentsListeYear;
+    anchor.innerHTML = contentsAll;
+  });
+  
+</script>
