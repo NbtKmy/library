@@ -6,8 +6,8 @@
 </div>
 
 <script>
- 
-function Neuerwerbung_Engl(mon, lang) {
+
+function Neuerwerbung_EnglZB(mon, lang) {
     
     let SuchstringZB = "Z01SE";
     let SuchstringLing = ",AND&query=lds56,contains,420";
@@ -33,23 +33,25 @@ function Neuerwerbung_Engl(mon, lang) {
     
     //  Letzter Monat
     const mnum = Number(Monat);
-    //const lm = mnum -1
     
-    let monate, fach, linkPrefix, linkSuffix, JahrString;
-    // Monat festlegen
+    
+    let monate, fach_month, fach_year, linkPrefix, linkSuffix, JahrString;
+
     if (lang === "en"){
         monate = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-        fach = ["Linguistics", "English Literature Secondary", "English Literature Primary", "American Literature Secondary", "American Literature Primary", "Literature Secondary", "Literature Primary"];
+        fach_month = ["Linguistics", "English Literature Secondary", "English Literature Primary", "American Literature Secondary", "American Literature Primary", "Literature Secondary", "Literature Primary"];
+        fach_year = ["Linguistics", "Literature Secondary", "Literature Primary"];
         linkPrefix = "https://uzb.swisscovery.slsp.ch/discovery/search?query=any,contains,";
         linSuffix =",AND&tab=LibraryCatalog&search_scope=MyInstitution&vid=41SLSP_UZB:UZB&lang=en&mode=advanced&offset=0";
-        Jahrstring = "Year";
+        JahrString = "Year";
         
     } else {
         monate = ["Januar", "Februar", "März", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Dezember"];
-        fach = ["Linguistik", "Englische Literatur Sekundär", "Englische Literatur Primär", "Amerikanische Literatur Sekundär", "Amerikanische Literatur Primär", "Literatur Sekundär", "Literatur Primär"];
+        fach_month = ["Linguistik", "Englische Literatur Sekundär", "Englische Literatur Primär", "Amerikanische Literatur Sekundär", "Amerikanische Literatur Primär", "Literatur Sekundär", "Literatur Primär"];
+        fach_year = ["Linguistik", "Literatur Sekundär", "Literatur Primär"];
         linkPrefix = "https://uzb.swisscovery.slsp.ch/discovery/search?query=any,contains,";
         linkSuffix = ",AND&tab=LibraryCatalog&search_scope=MyInstitution&vid=41SLSP_UZB:UZB&mode=advanced&offset=0";
-        Jahrstring = "Jahr";
+        JahrString = "Jahr";
     }
     
     
@@ -60,28 +62,37 @@ function Neuerwerbung_Engl(mon, lang) {
         Jahr = LetztesJahr;
     }
     let ym = xm - 1; 
-    let monatString = monate[ym];
-    JahrString += " " + String(Jahr); 
+    let monatString = monate[ym] + " " + String(Jahr);
+    
 
     let xm_string;
     xm_string = ("0" + xm).slice(-2);
+
     let SuchstringZBMonat = linkPrefix + SuchstringZB + Jahr + xm_string + "*";
     let linkMonatLing = SuchstringZBMonat + SuchstringLing + linkSuffix;
     let linkMonatEngLitSek = SuchstringZBMonat + SuchstringEngLitSek + linkSuffix;
     let linkMonatEngLitPri = SuchstringZBMonat + SuchstringEngLitPri + linkSuffix;
     let linkMonatAmiSek = SuchstringZBMonat + SuchstringAmiLitSek + linkSuffix;
     let linkMonatAmiPri = SuchstringZBMonat + SuchstringAmiLitPri + linkSuffix;
+    let arr_MonatLink = [linkMonatLing, linkMonatEngLitSek, linkMonatEngLitPri, linkMonatAmiSek, linkMonatAmiPri];
 
     // Liste für das Jahr
-    let SuchstringZBJahr = linkPrefix + SuchstringZB + Jahr + "*";
+    let search_year;
+    if (ym == 0){
+      search_year = LetztesJahr;
+    } else {
+      search_year = String(Jahr);
+    }
+    JahrString += " " + search_year; 
+    let SuchstringZBJahr = linkPrefix + SuchstringZB + search_year + "*";
     let linkJahrLing = SuchstringZBJahr + SuchstringLing + linkSuffix;
     let linkJahrSekLit = SuchstringZBJahr + SuchstringSekLit + linkSuffix;
     let linkJahrPriLit = SuchstringZBJahr + SuchstringPriLit + linkSuffix;
-
+    let arr_JahrLink = [linkJahrLing, linkJahrSekLit, linkJahrPriLit];
     
     
-    return_arr = [JahrString, monatString, fach, linkMonatLing, linkMonatEngLitSek, linkMonatEngLitPri, linkMonatAmiSek, linkMonatAmiPri, linkJahrLing, linkJahrSekLit, linkJahrPriLit];
-    return return_arr;
+    return_obj = {"jahr": JahrString, "monat": monatString, "fach_month": fach_month, "fach_year": fach_year, "monatlinks": arr_MonatLink, "jahrlinks": arr_JahrLink};
+    return return_obj;
 }
 
 // Linkliste erstellen und DOM in HTML hineinschieben
@@ -90,51 +101,34 @@ document.addEventListener("DOMContentLoaded", function() {
     let ancElments = document.querySelectorAll("#erwerbungsListe_EnglZB .link");
     let lang = document.documentElement.lang;
     
-    // Links für thematische Aufteilung
-    let contentsListeMonth, contentsListeYear, contentsAll, headlineMonth, headlineYear;
+    
+    let headlineMonth, headlineYear, fach_month, fach_year, monatlinks, jahrlinks;
     ancElments.forEach(function(el) {
       let mon = Number(el.classList[1]);
-      let return_arr = Neuerwerbung_Medizin(mon, lang);
+      let return_obj = Neuerwerbung_EnglZB(mon, lang);
   
-      headlineMonth = return_arr[1];
-      
-  
-      let text1 = return_arr[4];
-  
-      if (contentsListeMonth === undefined) {
-        contentsListeMonth = '<li><a href=' + return_arr[0] + ' target="_blank" rel="noopener noreferrer">' + text1 + '</a></li>';
-      } else {
-        contentsListeMonth += '<li><a href=' + return_arr[0] + ' target="_blank" rel="noopener noreferrer">' + text1 + '</a></li>';
-      }
-  
-      if (contentsListeYear === undefined) {
-        contentsListeYear = '<li><a href=' + return_arr[3] + ' target="_blank" rel="noopener noreferrer">' + text1 + '</a></li>';
-      } else {
-        contentsListeYear += '<li><a href=' + return_arr[3] + ' target="_blank" rel="noopener noreferrer">' + text1 + '</a></li>';
-      }
+      headlineMonth = return_obj.monat;
+      headlineYear = return_obj.jahr;
+      fach_month = return_obj.fach_month;
+      fach_year = return_obj.fach_year;
+      monatlinks = return_obj.monatlinks;
+      jahrlinks = return_obj.jahrlinks;
+
     });
     
-    
-    
-    let bibliotheken, zb_month, zb_year;
-    let zb_link_month = return_arr[8] + 'Z01SE' + return_arr[5] + return_arr[6] + '*,AND&query=lds56,contains,610&mode=advanced';
-    let zb_link_year = return_arr[8] + 'Z01SE' + return_arr[5] + '*,AND&query=lds56,contains,610&mode=advanced';
-   
-    if (lang == 'en') {
-        bibliotheken = ['UB Medicine', 'Zentralbibliothek'];
-        zb_month = '<li><a href=' + zb_link_month + ' target="_blank" rel="noopener noreferrer">Medicine, Health</a></li>';
-        zb_year = '<li><a href=' + zb_link_year + ' target="_blank" rel="noopener noreferrer">Medicine, Health</a></li>';
-        headlineYear = return_arr[5];
-    } else {
-        bibliotheken = ['UB Medizin', 'Zentralbibliothek'];
-        zb_month = '<li><a href=' + zb_link_month + ' target="_blank" rel="noopener noreferrer">Medizin, Gesundheit</a></li>';
-        zb_year = '<li><a href=' + zb_link_year + ' target="_blank" rel="noopener noreferrer">Medizin, Gesundheit</a></li>';
-        headlineYear = "Ganzes " + return_arr[5];
+    let contentsListMonth = "";
+    for (let i = 0; i < monatlinks.length; i++){
+      contentsListMonth += '<li><a href=' + monatlinks[i] + ' target="_blank" rel="noopener noreferrer">' + fach_month[i] + '</a></li>';
     }
+    contentsListMonth = '<h3>' + headlineMonth + '</h3><ul>' + contentsListMonth + '</ul>';
     
-    contentsListeMonth = '<h3>' + headlineMonth + '</h3><strong>' + bibliotheken[0] + '</strong><ul>' + contentsListeMonth + '</ul><br><strong>' + bibliotheken[1] + '</strong><ul>' + zb_month + '</ul>';
-    contentsListeYear = '<h3>' + headlineYear + '</h3><strong>' + bibliotheken[0] + '</strong><ul>' + contentsListeYear + '</ul><br><strong>' + bibliotheken[1] + '</strong><ul>' + zb_year + '</ul>';
-    contentsAll = contentsListeMonth + contentsListeYear;
+    let contentsListYear = "";
+    for (let j = 0; j < jahrlinks.length; j++){
+      contentsListYear += '<li><a href=' + jahrlinks[j] + ' target="_blank" rel="noopener noreferrer">' + fach_year[j] + '</a></li>';
+    }
+    contentsListYear = '<h3>' + headlineYear + '</h3><ul>' + contentsListYear + '</ul>';
+
+    let contentsAll = contentsListMonth + contentsListYear;
     anchor.innerHTML = contentsAll;
   });
   
