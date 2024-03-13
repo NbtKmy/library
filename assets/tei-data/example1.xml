@@ -1,0 +1,34 @@
+<TEI xmlns="http://www.tei-c.org/ns/1.0">
+    <teiHeader>
+        <fileDesc>
+            <titleStmt>
+                <title>Convenience store woman</title>
+                <author>Sayaka Murata</author>
+                <respStmt>
+                    <resp>this metadata converted into TEI/XML format automatically by ChatGPT-3.5</resp>
+                </respStmt>
+            </titleStmt>
+            <sourceDesc>
+                <bibl>
+                    <title level="a">Convenience store woman</title>
+                    <author>Sayaka Murata</author>
+                    <publicationStmt>
+                        <publisher>New York, NY : Grove Press</publisher>
+                        <date>2019</date>
+                    </publicationStmt>
+                    <editorialDecl>
+                        <edition>First Grove Atlantic paperback edition</edition>
+                    </editorialDecl>
+                    <extent>172 pages ; 18 cm</extent>
+                    <langUsage>
+                        <language ident="eng">English</language>
+                        <language ident="jpn">jpn</language>
+                        <languageUsage>
+                            <language ident="eng">In English, translated from the Japanese</language>
+                        </languageUsage>
+                    </langUsage>
+                </bibl>
+            </sourceDesc>
+        </fileDesc>
+    </teiHeader>
+</TEI>
