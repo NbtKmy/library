@@ -1,0 +1,97 @@
+<!-- hier nur html-elemente und js-code -->
+<!-- teaser-Name "neuerscheinungen" (DE) oder "neuerscheinungen_en" (EN) -->
+
+<div id="erwerbungsListe_Wirtschaft">
+  <div class="link 1"></div> 
+</div>
+
+<script>
+
+function Neuerwerbung_Wirtschaft(mon, lang) {
+  
+  
+  let SuchstringQuery = "query=any,contains,UZB~2FZ01~2F202406~2Fsaum,AND&query=lds56,contains,650,OR&query=any,contains,UZB~2FZ01~2F202406~2Fstet,AND&query=lds56,contains,330,OR&query=any,contains,UBFB-202406,OR&query=any,contains,UECON-202406,";
+    
+  // Datum heute
+  const d = new Date(Date.now());
+  const Datum = d.toISOString();
+  // ISO-String z.B. "2022-02-18T13:38:17.783Z"
+  let Jahr = Datum.slice(0,4);
+  //console.log(Jahr);
+  const Monat = Datum.slice(5,7);
+  
+  // Letztes Jahr
+  const ynum = Number(Jahr); 
+  const lynum = ynum - 1;
+  const LetztesJahr = String(lynum);
+  
+  //  Letzter Monat
+  const mnum = Number(Monat);
+  
+  
+  let monate, linkPrefix, linkSuffix, LinkTextPrefix, LinkTextSuffix;
+
+  if (lang === "en"){
+      monate = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+      linkPrefix = "https://uzb.swisscovery.slsp.ch/discovery/search?";
+      linkSuffix =",AND&tab=LibraryCatalog&search_scope=MyInstitution&vid=41SLSP_UZB:UZB&lang=en&mode=advanced&offset=0";
+      LinkTextPrefix = "New print publications";
+      LinkTextSuffix = ""; 
+      
+  } else {
+      monate = ["Januar", "Februar", "März", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Dezember"];
+      linkPrefix = "https://uzb.swisscovery.slsp.ch/discovery/search?";
+      linkSuffix = ",AND&tab=LibraryCatalog&search_scope=MyInstitution&vid=41SLSP_UZB:UZB&mode=advanced&offset=0";
+      LinkTextPrefix = "Neuerwerbungen";
+      LinkTextSuffix = " (nur print)"; 
+  }
+  
+  
+  let xm = mnum - mon;
+  
+  if (xm < 1){
+      xm = 12 + xm;
+      Jahr = LetztesJahr;
+  }
+  let ym = xm - 1; 
+  let monatString = monate[ym] + " " + String(Jahr);
+
+  let linkText = LinkTextPrefix + monatString + LinkTextSuffix;
+ 
+
+  let xm_string;
+  xm_string = ("0" + xm).slice(-2);
+
+  let SuchstringMonat = linkPrefix + SuchstringQuery + Jahr + xm_string;
+
+  
+  return [SuchstringMonat, linkText];
+}
+
+// Linkliste erstellen und DOM in HTML hineinschieben
+document.addEventListener("DOMContentLoaded", function() {
+  let anchor = document.querySelector("#erwerbungsListe_Wirtschaft");
+  let ancElments = document.querySelectorAll("#erwerbungsListe_Wirtschaft .link");
+  let lang = document.documentElement.lang;
+  
+  
+  let monatlinks, linkTexts;
+  ancElments.forEach(function(el) {
+    let mon = Number(el.classList[1]);
+    let return_obj = Neuerwerbung_Wirtschaft(mon, lang);
+
+    monatlinks = return_obj[0];
+    linkTexts = return_obj[1];
+
+  });
+  
+  let contents = "";
+  for (let i = 0; i < monatlinks.length; i++){
+    contents += '<a href=' + monatlinks[i] + ' target="_blank" rel="noopener noreferrer">' + linkTexts[i] + '</a>';
+  }
+  
+
+  anchor.innerHTML = contents;
+});
+
+</script>
