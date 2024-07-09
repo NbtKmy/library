@@ -29,7 +29,7 @@ function Neuerwerbung_Wirtschaft(mon, lang) {
   const mnum = Number(Monat);
   
   
-  let monate, linkPrefix, linkSuffix, LinkTextPrefix, LinkTextSuffix, depBusAdString, depEcoString, ZBString, depBusAdLink, depEcoLink, ZBLink;
+  let monate, linkPrefix, linkSuffix, LinkTextPrefix, LinkTextSuffix;
 
   if (lang === "en"){
       monate = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
@@ -38,12 +38,6 @@ function Neuerwerbung_Wirtschaft(mon, lang) {
       LinkTextPrefix = "New print publications ";
       LinkTextSuffix = ""; 
 
-      depBusAdString = "Department of Business Administration";
-      depEcoString = "Department of Economics";
-      ZBString = "Zentralbibliothek Zürich"
-      depBusAdLink = "https://www.business.uzh.ch/en.html";
-      depEcoLink = "https://www.econ.uzh.ch/en.html"; 
-      ZBLink = "https://www.zb.uzh.ch/en";
       
   } else {
       monate = ["Januar", "Februar", "März", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Dezember"];
@@ -52,12 +46,7 @@ function Neuerwerbung_Wirtschaft(mon, lang) {
       LinkTextPrefix = "Neuerwerbungen ";
       LinkTextSuffix = " (nur print)"; 
 
-      depBusAdString = "Institut für BWL";
-      depEcoString = "Institut für VWL"; 
-      ZBString = "Zentralbibliothek Zürich" 
-      depBusAdLink = "https://www.business.uzh.ch/de.html";
-      depEcoLink = "https://www.econ.uzh.ch/de.html";
-      ZBLink = "https://www.zb.uzh.ch/de/";
+
   }
   
   
@@ -70,17 +59,21 @@ function Neuerwerbung_Wirtschaft(mon, lang) {
   let ym = xm - 1; 
   let monatString = monate[ym] + " " + String(Jahr);
 
-  let linkText = LinkTextPrefix + monatString + LinkTextSuffix;
+  let linkTextMonat = LinkTextPrefix + monatString + LinkTextSuffix;
+  let linkTextJahr = LinkTextPrefix + String(Jahr) + LinkTextSuffix;
  
 
   let xm_string;
   xm_string = ("0" + xm).slice(-2);
-  yearMonat = Jahr + xm_string;
-  SuchstringQuery = SuchstringQuery.replaceAll("XXXXXX", yearMonat)
-  let SuchstringMonat = linkPrefix + SuchstringQuery + linkSuffix;
+  let yearMonat = Jahr + xm_string;
+  let SuchstringQuery_monat = SuchstringQuery.replaceAll("XXXXXX", yearMonat)
+  let SuchstringMonat = linkPrefix + SuchstringQuery_monat + linkSuffix;
 
+  let yearQuery = Jahr + "*";
+  let SuchstringQuery_year =  SuchstringQuery.replaceAll("XXXXXX", yearQuery)
+  let SuchstringYear = linkPrefix + SuchstringQuery_year + linkSuffix;
   
-  return [SuchstringMonat, linkText, depBusAdString, depEcoString, ZBString, depBusAdLink, depEcoLink, ZBLink];
+  return [SuchstringMonat, linkTextMonat, SuchstringYear, linkTextJahr];
 }
 
 // Linkliste erstellen und DOM in HTML hineinschieben
@@ -93,17 +86,13 @@ document.addEventListener("DOMContentLoaded", function() {
   let return_obj = Neuerwerbung_Wirtschaft(mon, lang);
   let monatlink = return_obj[0];
   let linktext = return_obj[1];
-  let depBusAdString = return_obj[2];
-  let depEcoString = return_obj[3];
-  let ZBString = return_obj[4];
-  let depBusAdLink = return_obj[5];
-  let depEcoLink = return_obj[6];
-  let ZBLink = return_obj[7];
+  let yearlink = return_obj[2];
+  let yeartext = return_obj[3];
+  
   
   let contents = '<a href=' + monatlink + ' target="_blank" rel="noopener noreferrer">' + linktext + '</a><br>';
-  contents += '<a href=' + depBusAdLink + ' target="_blank" rel="noopener noreferrer">' + depBusAdString + '</a><br>';
-  contents += '<a href=' + depEcoLink + ' target="_blank" rel="noopener noreferrer">' + depEcoString + '</a><br>';
-  contents += '<a href=' + ZBLink + ' target="_blank" rel="noopener noreferrer">' + ZBString + '</a>'
+  contents += '<a href=' + yearlink + ' target="_blank" rel="noopener noreferrer">' + yeartext + '</a>';
+
    
 
   anchor.innerHTML = contents;
