@@ -10,7 +10,7 @@
 function Neuerwerbung_Wirtschaft(mon, lang) {
   
   
-  let SuchstringQuery = "query=any,contains,UZB~2FZ01~2F202406~2Fsaum,AND&query=lds56,contains,650,OR&query=any,contains,UZB~2FZ01~2F202406~2Fstet,AND&query=lds56,contains,330,OR&query=any,contains,UBFB-202406,OR&query=any,contains,UECON-202406,";
+  let SuchstringQuery = "query=any,contains,UZB~2FZ01~2FXXXXXX~2Fsaum,AND&query=lds56,contains,650,OR&query=any,contains,UZB~2FZ01~2FXXXXXX~2Fstet,AND&query=lds56,contains,330,OR&query=any,contains,UBFB-XXXXXX,OR&query=any,contains,UECON-XXXXXX,";
     
   // Datum heute
   const d = new Date(Date.now());
@@ -35,14 +35,14 @@ function Neuerwerbung_Wirtschaft(mon, lang) {
       monate = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
       linkPrefix = "https://uzb.swisscovery.slsp.ch/discovery/search?";
       linkSuffix =",AND&tab=LibraryCatalog&search_scope=MyInstitution&vid=41SLSP_UZB:UZB&lang=en&mode=advanced&offset=0";
-      LinkTextPrefix = "New print publications";
+      LinkTextPrefix = "New print publications ";
       LinkTextSuffix = ""; 
       
   } else {
       monate = ["Januar", "Februar", "März", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Dezember"];
       linkPrefix = "https://uzb.swisscovery.slsp.ch/discovery/search?";
       linkSuffix = ",AND&tab=LibraryCatalog&search_scope=MyInstitution&vid=41SLSP_UZB:UZB&mode=advanced&offset=0";
-      LinkTextPrefix = "Neuerwerbungen";
+      LinkTextPrefix = "Neuerwerbungen ";
       LinkTextSuffix = " (nur print)"; 
   }
   
@@ -61,8 +61,9 @@ function Neuerwerbung_Wirtschaft(mon, lang) {
 
   let xm_string;
   xm_string = ("0" + xm).slice(-2);
-
-  let SuchstringMonat = linkPrefix + SuchstringQuery + Jahr + xm_string;
+  yearMonat = Jahr + xm_string;
+  SuchstringQuery = SuchstringQuery.replaceAll("XXXXXX", yearMonat)
+  let SuchstringMonat = linkPrefix + SuchstringQuery + linkSuffix;
 
   
   return [SuchstringMonat, linkText];
@@ -71,25 +72,16 @@ function Neuerwerbung_Wirtschaft(mon, lang) {
 // Linkliste erstellen und DOM in HTML hineinschieben
 document.addEventListener("DOMContentLoaded", function() {
   let anchor = document.querySelector("#erwerbungsListe_Wirtschaft");
-  let ancElments = document.querySelectorAll("#erwerbungsListe_Wirtschaft .link");
+  let ancElement = document.querySelector("#erwerbungsListe_Wirtschaft .link");
   let lang = document.documentElement.lang;
+ 
+  let mon = Number(ancElement.classList[1]);
+  let return_obj = Neuerwerbung_Wirtschaft(mon, lang);
+  let monatlink = return_obj[0];
+  let linktext = return_obj[1];
   
-  
-  let monatlinks, linkTexts;
-  ancElments.forEach(function(el) {
-    let mon = Number(el.classList[1]);
-    let return_obj = Neuerwerbung_Wirtschaft(mon, lang);
-
-    monatlinks = return_obj[0];
-    linkTexts = return_obj[1];
-
-  });
-  
-  let contents = "";
-  for (let i = 0; i < monatlinks.length; i++){
-    contents += '<a href=' + monatlinks[i] + ' target="_blank" rel="noopener noreferrer">' + linkTexts[i] + '</a>';
-  }
-  
+  let contents = '<a href=' + monatlink + ' target="_blank" rel="noopener noreferrer">' + linktext + '</a>'
+   
 
   anchor.innerHTML = contents;
 });
