@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        
+        <meta charset="UFT-8">
+    </head>
+    <body>
+
+  <h2>Foto Galerie</h2>
+  <div class="div-container">
+    <div class="slide fade">
+      <img src="https://veranstaltungen.ub.uzh.ch/portals/ubuzh/Bilder/1431_IMG_20231010_143039.jpg" alt="opening_event" class="image">
+    </div>
+    <div class="slide fade">
+      <img src="https://veranstaltungen.ub.uzh.ch/portals/ubuzh/Bilder/1469_IMG_20231019_192212.jpg" alt="game_night" class="image">
+    </div>
+    <div class="slide fade">
+      <img src="https://veranstaltungen.ub.uzh.ch/portals/ubuzh/Bilder/2619_Foto 01.11.23, 14 22 54.jpg" alt="AC_origin" class="image">
+    </div>
+    <div class="slide fade">
+      <img src="https://veranstaltungen.ub.uzh.ch/portals/ubuzh/Bilder/5152_IMG_20231108_140126.jpg" alt="AC_odysee" class="image">
+    </div>
+  </div>
+  <div class="arrowWrap">
+    <div class="arrowWrap__left"><button class="arrowWrap__btn js__btn-back"></button></div>
+    <div class="arrowWrap__right"><button class="arrowWrap__btn btn_right js__btn-next"></button></div>
+  </div>
+
+
+<script>
+let styleTag = document.createElement('style');
+styleTag.innerText = `
+ .div-container {
+  display: flex;
+  justify-content: center;
+  max-width: 1000px;
+}
+
+.slide {
+  display: none;
+}
+
+.image {
+  height: 500px;
+  width: 900px;
+  object-fit: scale-down;
+}
+
+.arrowWrap {
+  position: absolute;
+  top: 0;
+  left:50%;
+  transform: translateX(-50%);
+  width:90%;
+  height:100%;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.arrowWrap__left, .arrowWrap__right {
+  background-color: rgba(113, 135, 245, 0.8);
+  width:48px;
+  height:48px;
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+.arrowWrap__btn {
+  width:35%;
+  height:70%;
+  background-color: #fefefe;
+  display:block;
+}
+
+
+.arrowWrap__left .arrowWrap__btn {
+  clip-path: polygon(0% 50%, 100% 0%, 100% 100%);
+}
+
+.arrowWrap__right .arrowWrap__btn {
+  clip-path: polygon(0% 0%, 100% 50%, 0% 100%);
+}
+
+`;
+
+
+document.getElementsByTagName('head')[0].insertAdjacentElement('beforeend', styleTag);
+const container = document.querySelector(".div-container")
+const nextBtn = document.querySelector(".js__btn-next")
+const prevBtn = document.querySelector(".js__btn-back")
+let currentIndex = 0;
+
+const nextSlide = (inc) => {
+  const slides = document.getElementsByClassName("slide")
+  for (let i = 0; i < slides.length; i++) {
+    slides[i].style.display = "none"
+  }
+  currentIndex=(currentIndex+slides.length+inc)%slides.length;
+  slides[currentIndex].style.display = "block"
+}
+
+nextSlide(0)
+
+nextBtn.addEventListener("click", () => {
+  nextSlide(1)
+})
+
+prevBtn.addEventListener("click", () => {
+  nextSlide(-1)
+})
+
+</script>
+</body>
+</html>
