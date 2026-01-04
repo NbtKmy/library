@@ -9,43 +9,43 @@
 
 function quartalString(mon, year) {
     // Die gegenwärtige Quartalnummer ermitteln
-    let quartal_num, first_momth, second_month, third_month, year_str;
+    let quartal_num, first_month, second_month, third_month, year_str;
     let Suchstring_Quartal = "AND&query=any,contains,Z01FEYYYYM1*%20OR%20Z01FEYYYYM2*%20OR%20Z01FEYYYYM3*,AND&tab=41SLSP_UZB_DN&search_scope=DiscoveryNetwork&vid=41SLSP_UZB:UZB";
     if (mon >= 1 && mon <= 3){
         quartal_num = 1;
         year = year - 1;
         year_str = String(year);
-        first_momth = String(year) + "10";
+        first_month = String(year) + "10";
         second_month = String(year) + "11";
         third_month = String(year) + "12";
-        Suchstring_Quartal = Suchstring_Quartal.replace("YYYYM1", first_momth);
+        Suchstring_Quartal = Suchstring_Quartal.replace("YYYYM1", first_month);
         Suchstring_Quartal = Suchstring_Quartal.replace("YYYYM2", second_month);
         Suchstring_Quartal = Suchstring_Quartal.replace("YYYYM3", third_month);
     } else if (mon >=4 && mon <=6){
         quartal_num = 2;
         year_str = String(year);
-        first_momth = String(year) + "01";
+        first_month = String(year) + "01";
         second_month = String(year) + "02";
         third_month = String(year) + "03";
-        Suchstring_Quartal = Suchstring_Quartal.replace("YYYYM1", first_momth);
+        Suchstring_Quartal = Suchstring_Quartal.replace("YYYYM1", first_month);
         Suchstring_Quartal = Suchstring_Quartal.replace("YYYYM2", second_month);
         Suchstring_Quartal = Suchstring_Quartal.replace("YYYYM3", third_month);
     } else if (mon >=7 && mon <=9){
         quartal_num = 3;
         year_str = String(year);
-        first_momth = String(year) + "04";
+        first_month = String(year) + "04";
         second_month = String(year) + "05";
         third_month = String(year) + "06";
-        Suchstring_Quartal = Suchstring_Quartal.replace("YYYYM1", first_momth);
+        Suchstring_Quartal = Suchstring_Quartal.replace("YYYYM1", first_month);
         Suchstring_Quartal = Suchstring_Quartal.replace("YYYYM2", second_month);
         Suchstring_Quartal = Suchstring_Quartal.replace("YYYYM3", third_month);
     } else if (mon >=10 && mon <=12){
         quartal_num = 4;
         year_str = String(year);
-        first_momth = String(year) + "07";
+        first_month = String(year) + "07";
         second_month = String(year) + "08";
         third_month = String(year) + "09";
-        Suchstring_Quartal = Suchstring_Quartal.replace("YYYYM1", first_momth);
+        Suchstring_Quartal = Suchstring_Quartal.replace("YYYYM1", first_month);
         Suchstring_Quartal = Suchstring_Quartal.replace("YYYYM2", second_month);
         Suchstring_Quartal = Suchstring_Quartal.replace("YYYYM3", third_month);
     }
