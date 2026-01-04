@@ -1,0 +1,128 @@
+<!-- hier nur html-elemente und js-code -->
+<!-- teaser-Name "neuerscheinungen" (DE) oder "neuerscheinungen_en" (EN) -->
+
+<div id="erwerbungsListe_Musik">
+  <div class="link 1"></div> 
+</div>
+
+<script>
+
+function quartalString(mon, year) {
+    // Die gegenwärtige Quartalnummer ermitteln
+    let quartal_num, first_momth, second_month, third_month, year_str;
+    let Suchstring_Quartal = "AND&query=any,contains,Z01FEYYYYM1*%20OR%20Z01FEYYYYM2*%20OR%20Z01FEYYYYM3*,AND&tab=41SLSP_UZB_DN&search_scope=DiscoveryNetwork&vid=41SLSP_UZB:UZB";
+    if (mon >= 1 && mon <= 3){
+        quartal_num = 1;
+        year = year - 1;
+        year_str = String(year);
+        first_momth = String(year) + "10";
+        second_month = String(year) + "11";
+        third_month = String(year) + "12";
+        Suchstring_Quartal = Suchstring_Quartal.replace("YYYYM1", first_momth);
+        Suchstring_Quartal = Suchstring_Quartal.replace("YYYYM2", second_month);
+        Suchstring_Quartal = Suchstring_Quartal.replace("YYYYM3", third_month);
+    } else if (mon >=4 && mon <=6){
+        quartal_num = 2;
+        year_str = String(year);
+        first_momth = String(year) + "01";
+        second_month = String(year) + "02";
+        third_month = String(year) + "03";
+        Suchstring_Quartal = Suchstring_Quartal.replace("YYYYM1", first_momth);
+        Suchstring_Quartal = Suchstring_Quartal.replace("YYYYM2", second_month);
+        Suchstring_Quartal = Suchstring_Quartal.replace("YYYYM3", third_month);
+    } else if (mon >=7 && mon <=9){
+        quartal_num = 3;
+        year_str = String(year);
+        first_momth = String(year) + "04";
+        second_month = String(year) + "05";
+        third_month = String(year) + "06";
+        Suchstring_Quartal = Suchstring_Quartal.replace("YYYYM1", first_momth);
+        Suchstring_Quartal = Suchstring_Quartal.replace("YYYYM2", second_month);
+        Suchstring_Quartal = Suchstring_Quartal.replace("YYYYM3", third_month);
+    } else if (mon >=10 && mon <=12){
+        quartal_num = 4;
+        year_str = String(year);
+        first_momth = String(year) + "07";
+        second_month = String(year) + "08";
+        third_month = String(year) + "09";
+        Suchstring_Quartal = Suchstring_Quartal.replace("YYYYM1", first_momth);
+        Suchstring_Quartal = Suchstring_Quartal.replace("YYYYM2", second_month);
+        Suchstring_Quartal = Suchstring_Quartal.replace("YYYYM3", third_month);
+    }
+    // Die anzuzeigende Quartal festlegen
+    let qs;
+    if (quartal_num - 1 == 0){
+        qs = "4. Quartal";
+    } else {
+        qs = String(quartal_num - 1) + ". Quartal";
+    }
+    list = [qs, Suchstring_Quartal, year_str];
+    return list;
+}
+
+function Neuerwerbung_Musik(lang) {
+    
+    let URL_PREFIX = "https://uzb.swisscovery.slsp.ch/discovery/search?query=lds56,contains,780,";
+    let Suchstring_Literatur = "&facet=rtype,exclude,scores&facet=rtype,exclude,audios";
+    let Suchstring_Noten = "&facet=rtype,include,scores";
+    let Suchstring_Audio = "&facet=rtype,include,audios";
+    let SUFFIX = "&mode=advanced&offset=0";
+    
+    // Datum heute
+    const d = new Date(Date.now());
+    const Datum = d.toISOString();
+    // ISO-String z.B. "2022-02-18T13:38:17.783Z"
+    let Jahr = Datum.slice(0,4);
+    const ynum = Number(Jahr); 
+    const Monat = Datum.slice(5,7);
+    const mnum = Number(Monat);
+
+    let materialart;
+    if (lang === "en"){
+        
+        materialart = ["Books/Literature", "Scores", "Audio recordings"];
+        SUFFIX = "&lang=en" + SUFFIX;
+        
+    } else {
+        materialart = ["Bücher/Literatur", "Noten", "Tonträger"];
+        
+    }
+
+    let list = quartalString(mnum, ynum);
+
+    let url_books = URL_PREFIX + list[1] + Suchstring_Literatur + SUFFIX;
+    let url_scores = URL_PREFIX + list[1] + Suchstring_Noten + SUFFIX;
+    let url_audio = URL_PREFIX + list[1] + Suchstring_Audio + SUFFIX;
+    
+    let contents;
+    contents = `
+        <li>
+            <a href="${url_books}" target="_blank" rel="noopener noreferrer">
+                ${materialart[0]} (${list[2]} ${list[0]})
+            </a>
+        </li>
+        <li>
+            <a href="${url_scores}" target="_blank" rel="noopener noreferrer">
+                ${materialart[1]} (${list[2]} ${list[0]})
+            </a>
+        </li>
+        <li>
+            <a href="${url_audio}" target="_blank" rel="noopener noreferrer">
+                ${materialart[2]} (${list[2]} ${list[0]})
+            </a>
+        </li>
+    `;
+
+    return contents;
+}
+
+// Linkliste erstellen und DOM in HTML hineinschieben
+document.addEventListener("DOMContentLoaded", function() {
+    let anchor = document.querySelector("#erwerbungsListe_Musik");
+    //let ancElments = document.querySelectorAll("#erwerbungsListe_Musik .link");
+    let lang = document.documentElement.lang;
+    let contents = Neuerwerbung_Musik(lang);
+    anchor.innerHTML = contents;
+});
+
+</script>
