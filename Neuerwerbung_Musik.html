@@ -2,12 +2,58 @@
 <!-- teaser-Name "neuerscheinungen" (DE) oder "neuerscheinungen_en" (EN) -->
 
 <div id="erwerbungsListe_Musik">
-  <div class="link 1"></div> 
 </div>
 
 <script>
 
-function quartalString(mon, year) {
+function quartalString_actual(mon, year) {
+    // Die gegenwärtige Quartalnummer ermitteln
+    let quartal_num, first_month, second_month, third_month, year_str;
+    let Suchstring_Quartal = "AND&query=any,contains,Z01FEYYYYM1*%20OR%20Z01FEYYYYM2*%20OR%20Z01FEYYYYM3*,AND&tab=41SLSP_UZB_DN&search_scope=DiscoveryNetwork&vid=41SLSP_UZB:UZB";
+    if (mon >= 1 && mon <= 3){
+        quartal_num = 1;
+        year_str = String(year);
+        first_month = String(year) + "01";
+        second_month = String(year) + "02";
+        third_month = String(year) + "03";
+        Suchstring_Quartal = Suchstring_Quartal.replace("YYYYM1", first_month);
+        Suchstring_Quartal = Suchstring_Quartal.replace("YYYYM2", second_month);
+        Suchstring_Quartal = Suchstring_Quartal.replace("YYYYM3", third_month);
+    } else if (mon >=4 && mon <=6){
+        quartal_num = 2;
+        year_str = String(year);
+        first_month = String(year) + "04";
+        second_month = String(year) + "05";
+        third_month = String(year) + "06";
+        Suchstring_Quartal = Suchstring_Quartal.replace("YYYYM1", first_month);
+        Suchstring_Quartal = Suchstring_Quartal.replace("YYYYM2", second_month);
+        Suchstring_Quartal = Suchstring_Quartal.replace("YYYYM3", third_month);
+    } else if (mon >=7 && mon <=9){
+        quartal_num = 3;
+        year_str = String(year);
+        first_month = String(year) + "07";
+        second_month = String(year) + "08";
+        third_month = String(year) + "09";
+        Suchstring_Quartal = Suchstring_Quartal.replace("YYYYM1", first_month);
+        Suchstring_Quartal = Suchstring_Quartal.replace("YYYYM2", second_month);
+        Suchstring_Quartal = Suchstring_Quartal.replace("YYYYM3", third_month);
+    } else if (mon >=10 && mon <=12){
+        quartal_num = 4;
+        year_str = String(year);
+        first_month = String(year) + "10";
+        second_month = String(year) + "11";
+        third_month = String(year) + "12";
+        Suchstring_Quartal = Suchstring_Quartal.replace("YYYYM1", first_month);
+        Suchstring_Quartal = Suchstring_Quartal.replace("YYYYM2", second_month);
+        Suchstring_Quartal = Suchstring_Quartal.replace("YYYYM3", third_month);
+    }
+    // Die anzuzeigende Quartal festlegen
+    let qs = String(quartal_num) + ". Quartal";
+    list = [qs, Suchstring_Quartal, year_str];
+    return list;
+}
+
+function quartalString_minus1(mon, year) {
     // Die gegenwärtige Quartalnummer ermitteln
     let quartal_num, first_month, second_month, third_month, year_str;
     let Suchstring_Quartal = "AND&query=any,contains,Z01FEYYYYM1*%20OR%20Z01FEYYYYM2*%20OR%20Z01FEYYYYM3*,AND&tab=41SLSP_UZB_DN&search_scope=DiscoveryNetwork&vid=41SLSP_UZB:UZB";
@@ -80,37 +126,58 @@ function Neuerwerbung_Musik(lang) {
     let materialart;
     if (lang === "en"){
         
-        materialart = ["Books/Literature", "Scores", "Audio recordings"];
+        materialart = ["Literature", "Scores", "Recordings"];
         SUFFIX = "&lang=en" + SUFFIX;
         
     } else {
-        materialart = ["Bücher/Literatur", "Noten", "Tonträger"];
+        materialart = ["Fachliteratur", "Noten", "Tonaufnahmen"];
         
     }
 
-    let list = quartalString(mnum, ynum);
-
-    let url_books = URL_PREFIX + list[1] + Suchstring_Literatur + SUFFIX;
-    let url_scores = URL_PREFIX + list[1] + Suchstring_Noten + SUFFIX;
-    let url_audio = URL_PREFIX + list[1] + Suchstring_Audio + SUFFIX;
+    let list_1 = quartalString_actual(mnum, ynum);
+    let list_2 = quartalString_minus1(mnum, ynum);
+    let url_books = URL_PREFIX + list_1[1] + Suchstring_Literatur + SUFFIX;
+    let url_scores = URL_PREFIX + list_1[1] + Suchstring_Noten + SUFFIX;
+    let url_audio = URL_PREFIX + list_1[1] + Suchstring_Audio + SUFFIX;
+    let url_books_lastq = URL_PREFIX + list_2[1] + Suchstring_Literatur + SUFFIX;
+    let url_scores_lastq = URL_PREFIX + list_2[1] + Suchstring_Noten + SUFFIX;
+    let url_audio_lastq = URL_PREFIX + list_2[1] + Suchstring_Audio + SUFFIX;
     
     let contents;
     contents = `
-        <li>
-            <a href="${url_books}" target="_blank" rel="noopener noreferrer">
-                ${materialart[0]} (${list[2]} ${list[0]})
-            </a>
-        </li>
-        <li>
-            <a href="${url_scores}" target="_blank" rel="noopener noreferrer">
-                ${materialart[1]} (${list[2]} ${list[0]})
-            </a>
-        </li>
-        <li>
-            <a href="${url_audio}" target="_blank" rel="noopener noreferrer">
-                ${materialart[2]} (${list[2]} ${list[0]})
-            </a>
-        </li>
+        <h3>${materialart[0]}</h3>
+            <li>
+                <a href="${url_books}" target="_blank" rel="noopener noreferrer">
+                    ${list_1[2]} ${list_1[0]}
+                </a>
+            </li>
+            <li>
+                <a href="${url_books_lastq}" target="_blank" rel="noopener noreferrer">
+                    ${list_2[2]} ${list_2[0]}
+                </a>
+            </li>
+        <h3>${materialart[1]}</h3>
+            <li>
+                <a href="${url_scores}" target="_blank" rel="noopener noreferrer">
+                    ${list_1[2]} ${list_1[0]}
+                </a>
+            </li>
+            <li>
+                <a href="${url_scores_lastq}" target="_blank" rel="noopener noreferrer">
+                    ${list_2[2]} ${list_2[0]}
+                </a>
+            </li>
+        <h3>${materialart[2]}</h3>
+            <li>
+                <a href="${url_audio}" target="_blank" rel="noopener noreferrer">
+                    ${list_1[2]} ${list_1[0]}
+                </a>
+            </li>
+            <li>
+                <a href="${url_audio_lastq}" target="_blank" rel="noopener noreferrer">
+                    ${list_2[2]} ${list_2[0]}
+                </a>
+            </li>
     `;
 
     return contents;
