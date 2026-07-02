@@ -108,11 +108,11 @@ function quartalString_minus1(mon, year) {
 
 function Neuerwerbung_Musik(lang) {
     
-    let URL_PREFIX = "https://uzb.swisscovery.slsp.ch/discovery/search?query=lds56,contains,780,";
+    let URL_PREFIX = "https://uzb.swisscovery.ch/discovery/search?query=lds56,contains,780,";
     let Suchstring_Literatur = "&facet=rtype,exclude,scores&facet=rtype,exclude,audios";
     let Suchstring_Noten = "&facet=rtype,include,scores";
     let Suchstring_Audio = "&facet=rtype,include,audios";
-    let SUFFIX = "&mode=advanced&offset=0";
+    let SUFFIX = "&tab=LibraryCatalog&search_scope=MyInstitution&mode=advanced&offset=0";
     
     // Datum heute
     const d = new Date(Date.now());

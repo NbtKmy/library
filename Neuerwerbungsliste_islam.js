@@ -40,7 +40,7 @@ function Neuerwerbung_UAOII(mon) {
     Suchstring += Jahr + xm_string + "*";
 
     
-    const linkPart1 = "https://uzb.swisscovery.slsp.ch/discovery/search?tab=41SLSP_UZB_DN_and_CI&search_scope=DN_and_CI&vid=41SLSP_UZB:UZB&offset=0&query=any,contains,";
+    const linkPart1 = "https://uzb.swisscovery.ch/discovery/search?tab=41SLSP_UZB_DN_and_CI&search_scope=DN_and_CI&vid=41SLSP_UZB:UZB&offset=0&query=any,contains,";
     
     let link = linkPart1 + Suchstring;
     let return_arr = [link, monatString];
