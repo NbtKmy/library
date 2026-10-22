@@ -1,0 +1,101 @@
+<!-- hier nur html-elemente und js-code -->
+<!-- teaser-Name "neuerscheinungen" (DE) oder "neuerscheinungen_en" (EN) -->
+
+<div id="erwerbungsListe_Psychologie">
+  <div class="link 1"></div> 
+</div>
+
+<script>
+
+function Neuerwerbung_Psychologie(mon, lang) {
+  
+  // example URL https://uzb.swisscovery.ch/discovery/search?query=any,contains,Z01FEXXXXXX*,AND&query=lds56,contains,650,OR&query=any,contains,Z01FEXXXXXX*,AND&query=lds56,contains,330%20OR%20380,OR&query=any,contains,UBFB-XXXXXX,OR&query=any,contains,UECON-XXXXXX,AND&tab=LibraryCatalog&search_scope=MyInstitution&vid=41SLSP_UZB:UZB&mfacet=rtype,include,books,1&mode=advanced&offset=0
+  let SuchstringQuery = "query=any,contains,Z01FEXXXXXX*,AND&query=lds56,contains,650,OR&query=any,contains,Z01FEXXXXXX*,AND&query=lds56,contains,330%20OR%20380,OR&query=any,contains,UBFB-XXXXXX,OR&query=any,contains,UECON-XXXXXX";
+    
+  // Datum heute
+  const d = new Date(Date.now());
+  const Datum = d.toISOString();
+  // ISO-String z.B. "2022-02-18T13:38:17.783Z"
+  let Jahr = Datum.slice(0,4);
+  //console.log(Jahr);
+  const Monat = Datum.slice(5,7);
+  
+  // Letztes Jahr
+  const ynum = Number(Jahr); 
+  const lynum = ynum - 1;
+  const LetztesJahr = String(lynum);
+  
+  //  Letzter Monat
+  const mnum = Number(Monat);
+  
+  
+  let monate, linkPrefix, linkSuffix, LinkTextPrefix, LinkTextSuffix;
+
+  if (lang === "en"){
+      monate = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]; 
+      linkPrefix = "https://uzb.swisscovery.ch/discovery/search?";
+      linkSuffix =",AND&tab=LibraryCatalog&search_scope=MyInstitution&vid=41SLSP_UZB:UZB&lang=en&mfacet=rtype,include,books,1&mode=advanced&offset=0";
+      LinkTextPrefix = "New publications ";
+      LinkTextSuffix = " (print & selected ebooks)"; 
+
+      
+  } else {
+      monate = ["Januar", "Februar", "März", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Dezember"];
+      linkPrefix = "https://uzb.swisscovery.ch/discovery/search?";
+      linkSuffix = ",AND&tab=LibraryCatalog&search_scope=MyInstitution&vid=41SLSP_UZB:UZB&mfacet=rtype,include,books,1&mode=advanced&offset=0";
+      LinkTextPrefix = "Neuerwerbungen ";
+      LinkTextSuffix = " (print & ausgewählte Ebooks)"; 
+
+
+  }
+  
+  
+  let xm = mnum - mon;
+  
+  if (xm < 1){
+      xm = 12 + xm;
+      Jahr = LetztesJahr;
+  }
+  let ym = xm - 1; 
+  let monatString = monate[ym] + " " + String(Jahr);
+
+  let linkTextMonat = LinkTextPrefix + monatString + LinkTextSuffix;
+  let linkTextJahr = LinkTextPrefix + String(Jahr) + LinkTextSuffix;
+ 
+
+  let xm_string;
+  xm_string = ("0" + xm).slice(-2);
+  let yearMonat = Jahr + xm_string;
+  let SuchstringQuery_monat = SuchstringQuery.replaceAll("XXXXXX", yearMonat)
+  let SuchstringMonat = linkPrefix + SuchstringQuery_monat + linkSuffix;
+
+  let yearQuery = Jahr + "*";
+  let SuchstringQuery_year =  SuchstringQuery.replaceAll("XXXXXX", yearQuery)
+  let SuchstringYear = linkPrefix + SuchstringQuery_year + linkSuffix;
+  
+  return [SuchstringMonat, linkTextMonat, SuchstringYear, linkTextJahr];
+}
+
+// Linkliste erstellen und DOM in HTML hineinschieben
+document.addEventListener("DOMContentLoaded", function() {
+  let anchor = document.querySelector("#erwerbungsListe_Psychologie");
+  let ancElement = document.querySelector("#erwerbungsListe_Psychologie .link");
+  let lang = document.documentElement.lang;
+ 
+  let mon = Number(ancElement.classList[1]);
+  let return_obj = Neuerwerbung_Psychologie(mon, lang);
+  let monatlink = return_obj[0];
+  let linktext = return_obj[1];
+  let yearlink = return_obj[2];
+  let yeartext = return_obj[3];
+  
+  
+  let contents = '<a href=' + monatlink + ' target="_blank" rel="noopener noreferrer">' + linktext + '</a><br>';
+  contents += '<a href=' + yearlink + ' target="_blank" rel="noopener noreferrer">' + yeartext + '</a>';
+
+   
+
+  anchor.innerHTML = contents;
+});
+
+</script>
